@@ -23,7 +23,7 @@ yarn add firebase @types/firebase
 ### react-router-dom
 
 ```
-yarn add react-router-dom @types/react-router-dom
+yarn add react-router-dom @types/react-router-dom redux @types/redux
 ```
 
 ### react-redux & redux-toolkit

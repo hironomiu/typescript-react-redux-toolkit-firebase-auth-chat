@@ -1,20 +1,22 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
 import { messagesRef } from '../../firebase'
+import { Dispatch } from 'redux'
 
 type InitialState = {
   message: { name: string; text: string }
   messages: Array<{ key: string; name: string; text: string }>
   readMessagesStatus: 'idle' | 'loading'
 }
+
 const initialState: InitialState = {
   message: { name: '', text: '' },
-  messages: Array({ key: '', name: '', text: '' }),
+  messages: [{ key: '', name: '', text: '' }],
   readMessagesStatus: 'idle',
 }
 
-export const readMessages = () => (dispatch: any) => {
-  messagesRef.on('value', (snapshot) => {
+export const readMessages = () => (dispatch: Dispatch) => {
+  messagesRef.orderByKey().on('value', (snapshot) => {
     const messages = snapshot.val()
     if (!messages) {
       return
@@ -60,9 +62,11 @@ export const chatSlice = createSlice({
   extraReducers: (builder) => {
     // builder
     //   .addCase(readMessages.pending, (state) => {
+    //     console.log('pending')
     //     state.readMessagesStatus = 'loading'
     //   })
-    //   .addCase(readMessages.fulfilled, (state) => {
+    //   .addCase(readMessages.fulfilled, (state, action) => {
+    //     console.log('fulfilled')
     //     state.readMessagesStatus = 'idle'
     //   })
   },

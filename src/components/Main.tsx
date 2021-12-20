@@ -1,4 +1,4 @@
-import React, { FC, useEffect, memo } from 'react'
+import React, { FC, useEffect, memo, useState } from 'react'
 import { pushContent } from '../firebase'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -12,8 +12,6 @@ import {
   selectMessage,
   selectMessages,
   readMessages,
-  selectReadMessagesStatus,
-  setReadMessageStatus,
 } from '../features/chat/chatSlice'
 
 export const Main: FC = memo(() => {
@@ -23,7 +21,6 @@ export const Main: FC = memo(() => {
   const displayName = useSelector(selectDisplayName)
   const message = useSelector(selectMessage)
   const messages = useSelector(selectMessages)
-  const readMessagesStatus = useSelector(selectReadMessagesStatus)
 
   useEffect(() => {
     if (!isAuthentication) navigate('/login')
@@ -36,21 +33,16 @@ export const Main: FC = memo(() => {
     }
   }, [isAuthentication, dispatch])
 
-  if (
-    readMessagesStatus !== 'idle'
-    // ||
-    // (messages.length === 1 && messages[0].key === '')
-  )
-    return <div>loading</div>
-
   return (
     <div>
       <div>
-        {messages.map((message) => (
-          <div key={message.key}>
-            {message.name}:{message.text}
-          </div>
-        ))}
+        {messages[0].key === ''
+          ? 'empty'
+          : messages?.map((message) => (
+              <div key={message.key}>
+                {message.name}:{message.text}
+              </div>
+            ))}
       </div>
       <div>
         <span>{message.name}</span>

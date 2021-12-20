@@ -32,6 +32,41 @@ yarn add react-router-dom @types/react-router-dom redux @types/redux
 yarn add @reduxjs/toolkit react-redux @types/react-redux
 ```
 
+initialize
+
+```
+npx tailwindcss init -p
+```
+
+modify tailwind.config.js
+
+```
+module.exports = {
+  content: ['./src/**/*.tsx', './public/index.html'],
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+modify `index.css`
+
+```
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### Tailwind
+
+```
+yarn add tailwindcss@latest @types/tailwindcss
+```
+
 ### GitHub
 
 アカウント -> Settings -> Developer settings -> OAuth Apps -> New OAuth App

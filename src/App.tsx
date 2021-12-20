@@ -14,8 +14,8 @@ const App: VFC = () => {
             <Route path="/" element={<Layout />}>
               <Route path="/" element={<Main />}></Route>
               <Route path="/profile" element={<Profile />}></Route>
+              <Route path="/login" element={<Login />}></Route>
             </Route>
-            <Route path="/login" element={<Login />}></Route>
           </Routes>
           {/* <Layout /> */}
         </Provider>

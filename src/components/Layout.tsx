@@ -9,14 +9,13 @@ const Layout: FC = () => {
 
   useEffect(() => {
     dispatch(checkAuthentication())
-    return function cleanup() {}
   }, [dispatch])
 
   return (
-    <div>
-      <Header></Header>
-      <Outlet></Outlet>
-      <Footer></Footer>
+    <div className="flex flex-col justify-center items-center font-mono w-screen">
+      <Header />
+      <Outlet />
+      <Footer />
     </div>
   )
 }

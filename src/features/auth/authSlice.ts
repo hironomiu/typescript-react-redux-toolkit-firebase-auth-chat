@@ -5,6 +5,7 @@ import { socialMediaAuth, GithubProvider, auth } from '../../firebase'
 const initialState = {
   isAuthentication: false,
   authenticationStatus: 'idle',
+  checkAuthenticationStatus: 'idle',
   email: '',
   displayName: '',
 }
@@ -63,6 +64,10 @@ export const checkAuthentication = () => (dispatch: any) => {
 
 export const { setUser, signIn } = authSlice.actions
 
+export const selectAuthenticationStatus = (state: RootState) =>
+  state.auth.authenticationStatus
+export const selectCheckAuthentication = (state: RootState) =>
+  state.auth.checkAuthenticationStatus
 export const selectIsAuthentication = (state: RootState) =>
   state.auth.isAuthentication
 export const selectDisplayName = (state: RootState) => state.auth.displayName

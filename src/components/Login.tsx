@@ -25,5 +25,3 @@ export const Login: FC = memo((props) => {
     </div>
   )
 })
-
-// export default Login

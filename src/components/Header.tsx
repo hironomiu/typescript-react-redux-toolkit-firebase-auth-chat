@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { signOut } from '../features/auth/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectIsAuthentication } from '../features/auth/authSlice'
@@ -8,6 +9,8 @@ export const Header = () => {
   return (
     <div>
       ヘッダー
+      <Link to="/">Top</Link>
+      <Link to="/profile">Profile</Link>
       {isAuthentication ? (
         <button onClick={() => dispatch(signOut())}>SignOut</button>
       ) : null}

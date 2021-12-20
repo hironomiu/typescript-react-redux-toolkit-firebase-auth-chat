@@ -1,8 +1,8 @@
 import { FC, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { checkAuthentication } from '../features/auth/authSlice'
-import { Login, Header, Main, Footer } from './'
+import { Header, Footer } from './'
 
 const Layout: FC = () => {
   const dispatch = useDispatch()
@@ -15,10 +15,7 @@ const Layout: FC = () => {
   return (
     <div>
       <Header></Header>
-      <Routes>
-        <Route path="/" element={<Main />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-      </Routes>
+      <Outlet></Outlet>
       <Footer></Footer>
     </div>
   )

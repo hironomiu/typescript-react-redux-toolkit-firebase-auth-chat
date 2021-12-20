@@ -1,66 +1,47 @@
-import React, { FC, useState, useEffect, memo } from 'react'
-import { pushContent, messagesRef } from '../firebase'
+import React, { FC, useEffect, memo } from 'react'
+import { pushContent } from '../firebase'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   selectIsAuthentication,
   selectDisplayName,
 } from '../features/auth/authSlice'
+import {
+  setName,
+  setText,
+  selectMessage,
+  selectMessages,
+  readMessages,
+  selectReadMessagesStatus,
+  setReadMessageStatus,
+} from '../features/chat/chatSlice'
 
 export const Main: FC = memo(() => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const isAuthentication = useSelector(selectIsAuthentication)
   const displayName = useSelector(selectDisplayName)
+  const message = useSelector(selectMessage)
+  const messages = useSelector(selectMessages)
+  const readMessagesStatus = useSelector(selectReadMessagesStatus)
 
   useEffect(() => {
-    console.log(isAuthentication)
     if (!isAuthentication) navigate('/login')
-    return function cleanup() {}
-  }, [navigate, isAuthentication])
-
-  const [message, setMessage] = useState({
-    name: displayName,
-    text: '',
-  })
-  const [messages, setMessages] = useState([{ key: '', name: '', text: '' }])
-  const [status, setStatus] = useState<'idle' | 'loading'>('idle')
-
-  const setText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (e.target.value) {
-      setMessage((p) => (p = { ...message, text: e.target.value }))
-    }
-  }
+    else dispatch(setName(displayName))
+  }, [navigate, isAuthentication, displayName, dispatch])
 
   useEffect(() => {
     if (isAuthentication) {
-      setStatus('loading')
-      messagesRef.on('value', (snapshot) => {
-        const messages = snapshot.val()
-
-        type Message = {
-          name: string
-          text: string
-        }
-        const entries: Array<[string, Message]> = Object.entries(messages)
-
-        type NewMessage = {
-          key: string
-          name: string
-          text: string
-        }
-
-        const newMessages: Array<NewMessage> = entries.map((data) => {
-          const [key, message] = data
-
-          return { key, ...message }
-        })
-        setMessages(newMessages)
-        setStatus('idle')
-      })
+      dispatch(readMessages())
     }
-  }, [isAuthentication])
+  }, [isAuthentication, dispatch])
 
-  if (status === 'loading') return <div>loading</div>
+  if (
+    readMessagesStatus !== 'idle'
+    // ||
+    // (messages.length === 1 && messages[0].key === '')
+  )
+    return <div>loading</div>
 
   return (
     <div>
@@ -74,7 +55,9 @@ export const Main: FC = memo(() => {
       <div>
         <span>{message.name}</span>
         <textarea
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setText(e)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            dispatch(setText(e.target.value))
+          }}
           defaultValue={message.text}
         ></textarea>
 

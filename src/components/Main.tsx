@@ -25,8 +25,7 @@ export const Main: FC = memo(() => {
   const messages = useSelector(selectMessages)
 
   useEffect(() => {
-    if (!isAuthentication) navigate('/login')
-    else dispatch(setName(displayName))
+    if (isAuthentication) dispatch(setName(displayName))
   }, [navigate, isAuthentication, displayName, dispatch])
 
   useEffect(() => {
@@ -44,10 +43,7 @@ export const Main: FC = memo(() => {
 
   return (
     <div className="flex flex-col justify-center h-[80vh] md:w-[60vh] sm:w-[55vh]">
-      <div
-        id="chat"
-        className="overflow-auto h-[80vh] md:w-[60vh] sm:w-[55vh] bg-gray-100 rounded"
-      >
+      <div className="mt-5 overflow-auto h-[80vh] md:w-[60vh] sm:w-[55vh] bg-gray-100 rounded">
         <div className="p-2">
           {messages[0].key === ''
             ? ''
@@ -64,7 +60,7 @@ export const Main: FC = memo(() => {
       <div className="flex items-center mt-5">
         <span className="mr-5">{message.name}</span>
         <textarea
-          className="p-2"
+          className="p-2 focus:outline-gray-600 border-solid border-2"
           placeholder="チャットコメント"
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             dispatch(setText(e.target.value))
@@ -74,7 +70,7 @@ export const Main: FC = memo(() => {
         ></textarea>
 
         <button
-          className="mx-2 px-5 bg-gray-300 rounded"
+          className="mx-2 px-5 bg-gray-300 rounded focus:outline-gray-600 border-solid border-2"
           disabled={!message.name || !message.text}
           onClick={() => pushContent(message)}
         >

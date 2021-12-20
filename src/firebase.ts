@@ -52,5 +52,8 @@ type Message = {
   name: string
   text: string
 }
-export const pushContent = ({ name, text }: Message) =>
+export const pushMessage = ({ name, text }: Message) => {
+  console.log('hoge:', name, text)
   messagesRef.push({ name, text })
+  // messagesRef.push({ name: 'hironomiu', text: 'hoge' })
+}

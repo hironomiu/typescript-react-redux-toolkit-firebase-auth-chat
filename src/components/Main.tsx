@@ -1,7 +1,7 @@
 import React, { FC, useEffect, memo, useRef, useLayoutEffect } from 'react'
-import { pushContent } from '../firebase'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { pushMessage } from '../firebase'
 import {
   selectIsAuthentication,
   selectDisplayName,
@@ -65,14 +65,17 @@ export const Main: FC = memo(() => {
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             dispatch(setText(e.target.value))
           }}
-          defaultValue={message.text}
+          value={message.text}
           ref={autoFocus}
         ></textarea>
 
         <button
           className="mx-2 px-5 bg-gray-300 rounded focus:outline-gray-600 border-solid border-2"
           disabled={!message.name || !message.text}
-          onClick={() => pushContent(message)}
+          onClick={() => {
+            pushMessage(message)
+            dispatch(setText(''))
+          }}
         >
           Post
         </button>

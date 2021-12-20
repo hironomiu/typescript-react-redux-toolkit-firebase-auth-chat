@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-import { messagesRef } from '../../firebase'
+import { messagesRef, pushMessage } from '../../firebase'
 import { Dispatch } from 'redux'
 
 type InitialState = {
@@ -15,7 +15,7 @@ const initialState: InitialState = {
   readMessagesStatus: 'idle',
 }
 
-export const readMessages = () => (dispatch: Dispatch) => {
+export const readMessages = () => (dispatch: Dispatch, getState: any) => {
   messagesRef.orderByKey().on('value', (snapshot) => {
     const messages = snapshot.val()
     if (!messages) {
@@ -49,9 +49,11 @@ export const chatSlice = createSlice({
       state.message.name = action.payload
     },
     setText: (state, action) => {
+      console.log(state.message.text)
       state.message.text = action.payload
     },
     setMessages: (state, action) => {
+      console.log('called')
       state.messages = action.payload
     },
     setReadMessageStatus: (state, action) => {

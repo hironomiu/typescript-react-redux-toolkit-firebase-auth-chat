@@ -7,6 +7,7 @@ import { selectIsAuthentication } from '../features/auth/authSlice'
 export const Header: FC = memo(() => {
   const dispatch = useDispatch()
   const isAuthentication = useSelector(selectIsAuthentication)
+
   return (
     <>
       <header className="flex flex-col">

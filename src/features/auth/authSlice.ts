@@ -15,7 +15,6 @@ export const authentication = createAsyncThunk(
   'auth/authentication',
   async (provider: GithubProvider) => {
     const res = await socialMediaAuth(provider)
-    console.log(res)
     return { email: res?.email, displayName: res?.displayName, uid: res?.uid }
   }
 )
@@ -30,7 +29,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      console.log(action.payload)
       state.email = action.payload.email
       state.displayName = action.payload.displayName
       state.uid = action.payload.uid

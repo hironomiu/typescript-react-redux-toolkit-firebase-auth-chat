@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-import { messagesRef, pushMessage } from '../../firebase'
+import { messagesRef } from '../../firebase'
 import { Dispatch } from 'redux'
 
 type InitialState = {
@@ -49,15 +49,12 @@ export const chatSlice = createSlice({
       state.message.name = action.payload
     },
     setText: (state, action) => {
-      console.log(state.message.text)
       state.message.text = action.payload
     },
     setMessages: (state, action) => {
-      console.log('called')
       state.messages = action.payload
     },
     setReadMessageStatus: (state, action) => {
-      console.log(action.payload)
       state.readMessagesStatus = action.payload
     },
   },

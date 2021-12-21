@@ -4,6 +4,7 @@ type Props = {
   name: string
   text: string
 }
+
 export const Message: FC<Props> = memo(({ name, text }) => {
   return (
     <div className="flex flex-col m-2">

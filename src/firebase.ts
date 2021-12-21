@@ -54,6 +54,12 @@ type Message = {
 }
 export const pushMessage = ({ name, text }: Message) => {
   console.log('hoge:', name, text)
-  messagesRef.push({ name, text })
+  const createdAt = new Date()
+  console.log(createdAt)
+  messagesRef.push({
+    name,
+    text,
+    createdAt: firebase.database.ServerValue.TIMESTAMP,
+  })
   // messagesRef.push({ name: 'hironomiu', text: 'hoge' })
 }

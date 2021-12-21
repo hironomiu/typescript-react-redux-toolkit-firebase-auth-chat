@@ -22,6 +22,7 @@ export const ChatList: FC = memo(() => {
                 key={message.key}
                 name={message.name}
                 text={message.text}
+                createdAt={message.createdAt}
               />
             ))}
         <div ref={scrollBottomRef}></div>

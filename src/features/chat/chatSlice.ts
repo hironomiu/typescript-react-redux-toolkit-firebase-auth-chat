@@ -5,13 +5,18 @@ import { Dispatch } from 'redux'
 
 type InitialState = {
   message: { name: string; text: string }
-  messages: Array<{ key: string; name: string; text: string }>
+  messages: Array<{
+    key: string
+    name: string
+    text: string
+    createdAt: string
+  }>
   readMessagesStatus: 'idle' | 'loading'
 }
 
 const initialState: InitialState = {
   message: { name: '', text: '' },
-  messages: [{ key: '', name: '', text: '' }],
+  messages: [{ key: '', name: '', text: '', createdAt: '' }],
   readMessagesStatus: 'idle',
 }
 

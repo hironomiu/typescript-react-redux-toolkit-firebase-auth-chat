@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, memo } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -7,7 +7,7 @@ import {
 } from '../features/auth/authSlice'
 import { Header, Footer } from './'
 
-const Layout: FC = () => {
+export const Layout: FC = memo(() => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const isAuthentication = useSelector(selectIsAuthentication)
@@ -27,6 +27,4 @@ const Layout: FC = () => {
       <Footer />
     </div>
   )
-}
-
-export default Layout
+})

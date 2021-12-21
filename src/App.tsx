@@ -1,5 +1,5 @@
 import { VFC } from 'react'
-import Layout from './components/Layout'
+import { Layout } from './components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './app/store'

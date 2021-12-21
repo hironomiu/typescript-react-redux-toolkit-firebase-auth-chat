@@ -1,5 +1,5 @@
-import React from 'react'
+import { FC, memo } from 'react'
 
-export const Profile = () => {
+export const Profile: FC = memo(() => {
   return <div>Profile</div>
-}
+})

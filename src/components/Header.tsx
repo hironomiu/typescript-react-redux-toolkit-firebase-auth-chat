@@ -1,9 +1,10 @@
+import { FC, memo } from 'react'
 import { Link } from 'react-router-dom'
 import { signOut } from '../features/auth/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectIsAuthentication } from '../features/auth/authSlice'
 
-export const Header = () => {
+export const Header: FC = memo(() => {
   const dispatch = useDispatch()
   const isAuthentication = useSelector(selectIsAuthentication)
   return (
@@ -34,6 +35,4 @@ export const Header = () => {
       </header>
     </>
   )
-}
-
-// export default Header
+})

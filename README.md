@@ -32,6 +32,14 @@ yarn add react-router-dom @types/react-router-dom redux @types/redux
 yarn add @reduxjs/toolkit react-redux @types/react-redux
 ```
 
+### Tailwind(v3)
+
+[Tailwind 公式 docs/instllation](https://tailwindcss.com/docs/installation)
+
+```
+yarn add tailwindcss@latest @types/tailwindcss
+```
+
 initialize
 
 ```
@@ -59,12 +67,6 @@ modify `index.css`
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-```
-
-### Tailwind
-
-```
-yarn add tailwindcss@latest @types/tailwindcss
 ```
 
 ### GitHub

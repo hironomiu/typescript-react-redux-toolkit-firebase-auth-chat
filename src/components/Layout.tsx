@@ -21,9 +21,11 @@ export const Layout: FC = memo(() => {
   }, [navigate, isAuthentication, dispatch])
 
   return (
-    <div className="flex flex-col justify-center items-center font-mono w-screen">
+    <div className="container flex flex-col w-[100vw] h-[100vh]">
       <Header />
-      <Outlet />
+      <div className="flex flex-col items-center justify-center flex-1 w-screen">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   )

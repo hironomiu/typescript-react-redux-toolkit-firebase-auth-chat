@@ -17,7 +17,6 @@ const App: VFC = () => {
               <Route path="/login" element={<Login />}></Route>
             </Route>
           </Routes>
-          {/* <Layout /> */}
         </Provider>
       </BrowserRouter>
     </div>

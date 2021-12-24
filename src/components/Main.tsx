@@ -23,9 +23,9 @@ export const Main: FC = memo(() => {
   }, [isAuthentication, dispatch])
 
   return (
-    <div className="flex flex-col justify-center h-[80vh] md:w-[60vh] sm:w-[55vh]">
+    <>
       <ChatList />
       <ChatForm />
-    </div>
+    </>
   )
 })

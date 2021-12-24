@@ -10,29 +10,34 @@ export const Header: FC = memo(() => {
 
   return (
     <>
-      <header className="flex flex-col">
-        <div className="flex justify-center bg-gray-400 w-screen">
-          <nav className="flex flex-row justify-between items-center md:w-[80vh] sm:w-[60vh] ">
-            <div className="py-6 md:ml-4 sm:ml-1">
-              <Link className="p-3 hover:bg-gray-500 rounded" to="/">
-                Top
-              </Link>
-              <Link className="p-3 hover:bg-gray-500 rounded" to="/profile">
-                Profile
-              </Link>
-            </div>
-            <div className="py-3 md:mr-4 sm:mr-1">
-              {isAuthentication ? (
+      <header className="bg-gray-400 w-screen">
+        <nav className="flex flex-row justify-between ">
+          {isAuthentication ? (
+            <>
+              <div className="py-6 md:ml-4 sm:ml-1">
+                <span className="p-3">Super Web Site!</span>
+                <Link className="p-3 hover:bg-gray-500 rounded" to="/">
+                  Top
+                </Link>
+                <Link className="p-3 hover:bg-gray-500 rounded" to="/profile">
+                  Profile
+                </Link>
+              </div>
+              <div className="py-3 md:mr-4 sm:mr-1">
                 <button
                   className=" p-3 hover:bg-gray-500 rounded "
                   onClick={() => dispatch(signOut())}
                 >
                   SignOut
                 </button>
-              ) : null}
+              </div>
+            </>
+          ) : (
+            <div className="py-6 md:ml-4 sm:ml-1">
+              <span className="p-3">Super Web Site!</span>
             </div>
-          </nav>
-        </div>
+          )}
+        </nav>
       </header>
     </>
   )

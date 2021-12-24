@@ -18,13 +18,13 @@ export const Login: FC = memo((props) => {
   }, [isAuthentication, navigate])
 
   return (
-    <div className="mt-5">
+    <>
       <button
         className="mx-2 py-2 px-5 bg-gray-300 rounded focus:outline-gray-600 border-solid border-2"
         onClick={() => dispatch(authentication(githubProvider))}
       >
         GitHub Lgoin!
       </button>
-    </div>
+    </>
   )
 })

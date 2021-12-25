@@ -11,7 +11,7 @@ export const ChatForm: FC = memo(() => {
   const [isJapaneseInput, setIsJapaneseInput] = useState(false)
 
   return (
-    <div className="flex items-center mt-5 ">
+    <div className="flex items-center my-5 ">
       <span className="mr-5">{message.name}</span>
       <textarea
         className="p-2 focus:outline-gray-600 border-solid border-2"

@@ -23,7 +23,7 @@ export const Layout: FC = memo(() => {
   return (
     <div className="container flex flex-col w-[100vw] h-[100vh]">
       <Header />
-      <div className="flex flex-col items-center justify-center flex-1 w-screen">
+      <div className="flex flex-col overflow-y-auto items-center justify-center flex-1 w-screen">
         <Outlet />
       </div>
       <Footer />

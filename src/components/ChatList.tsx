@@ -13,7 +13,7 @@ export const ChatList: FC = memo(() => {
   }, [messages])
 
   return (
-    <div className="mt-5 overflow-auto h-[80vh] md:w-[60vh] sm:w-[55vh] bg-gray-100 rounded">
+    <div className="mt-5 overflow-auto h-[80vh] w-[80vw] bg-gray-100 rounded">
       <div className="p-2">
         {messages[0].key === ''
           ? ''

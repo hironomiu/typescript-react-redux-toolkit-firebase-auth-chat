@@ -9,16 +9,28 @@ const initialState = {
   email: '',
   displayName: '',
   uid: '',
+  photoURL: '',
 }
 
 export const authentication = createAsyncThunk(
   'auth/authentication',
   async (provider: GithubProvider) => {
     const res = await socialMediaAuth(provider)
-    if (res?.email && res?.displayName && res.uid) {
-      pushUser({ email: res.email, name: res.displayName, uid: res.uid })
+    console.log(res?.photoURL)
+    if (res?.email && res?.displayName && res.uid && res.photoURL) {
+      pushUser({
+        email: res.email,
+        name: res.displayName,
+        uid: res.uid,
+        photoURL: res?.photoURL,
+      })
     }
-    return { email: res?.email, displayName: res?.displayName, uid: res?.uid }
+    return {
+      email: res?.email,
+      displayName: res?.displayName,
+      uid: res?.uid,
+      photoURL: res?.photoURL,
+    }
   }
 )
 
@@ -35,6 +47,7 @@ export const authSlice = createSlice({
       state.email = action.payload.email
       state.displayName = action.payload.displayName
       state.uid = action.payload.uid
+      state.photoURL = action.payload.photoURL
     },
     signIn: (state) => {
       state.isAuthentication = true
@@ -49,12 +62,14 @@ export const authSlice = createSlice({
         if (
           action.payload.displayName &&
           action.payload.uid &&
-          action.payload.email
+          action.payload.email &&
+          action.payload.photoURL
         ) {
           state.isAuthentication = true
           state.uid = action.payload.uid
           state.displayName = action.payload.displayName
           state.email = action.payload.email
+          state.photoURL = action.payload.photoURL
         }
         state.authenticationStatus = 'idle'
       })
@@ -72,6 +87,7 @@ export const checkAuthentication = () => (dispatch: any) => {
           email: user.email,
           displayName: user.displayName,
           uid: user.uid,
+          photoURL: user.photoURL,
         })
       )
       dispatch(signIn())
@@ -89,4 +105,5 @@ export const selectIsAuthentication = (state: RootState) =>
   state.auth.isAuthentication
 export const selectUid = (state: RootState) => state.auth.uid
 export const selectDisplayName = (state: RootState) => state.auth.displayName
+export const selectPhotoURL = (state: RootState) => state.auth.photoURL
 export default authSlice.reducer

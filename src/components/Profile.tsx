@@ -1,5 +1,12 @@
 import { FC, memo, useState } from 'react'
 import { storageRef } from '../firebase'
+import { useSelector } from 'react-redux'
+import {
+  selectUserName,
+  selectUserEmail,
+  selectUserPhotoURL,
+  selectUserUid,
+} from '../features/user/userSlice'
 
 export const Profile: FC = memo(() => {
   const [preview, setPreview] = useState('')
@@ -9,9 +16,14 @@ export const Profile: FC = memo(() => {
     setPreview(window.URL.createObjectURL(files[0]))
     setImage(e.target.files.item(0))
   }
+  const name = useSelector(selectUserName)
+  const email = useSelector(selectUserEmail)
+  const photoURL = useSelector(selectUserPhotoURL)
+  const uid = useSelector(selectUserUid)
+
   return (
     <>
-      <div>Profile</div>
+      <div>{name}'s Profile</div>
       <input type="file" name="" id="" onChange={handleChangeFile} />
 
       <div className="flex -space-x-2 overflow-hidden flex-col px-4">

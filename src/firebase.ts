@@ -49,19 +49,18 @@ export const socialMediaAuth = async (
 }
 
 // Realtime Database
-const database = firebase.database()
+export const database = firebase.database()
 
 // Realtime Database users
-
-// export const usersRef = database.ref('users')
 
 type PostUser = {
   name: string
   uid: string
   email: string
+  photoURL: string
 }
 
-export const pushUser = ({ name, uid, email }: PostUser) => {
+export const pushUser = ({ name, uid, email, photoURL }: PostUser) => {
   const usersRef = database.ref('users/' + uid)
   usersRef.on('value', (snapshot) => {
     const user = snapshot.val()
@@ -70,6 +69,7 @@ export const pushUser = ({ name, uid, email }: PostUser) => {
         name,
         uid,
         email,
+        photoURL,
         createdAt: firebase.database.ServerValue.TIMESTAMP,
       })
     }

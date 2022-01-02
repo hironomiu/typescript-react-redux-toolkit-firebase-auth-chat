@@ -2,11 +2,14 @@ import { FC, memo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { pushMessage } from '../firebase'
 import { setText, selectMessage } from '../features/chat/chatSlice'
+import { selectPhotoURL } from '../features/auth/authSlice'
 
 export const ChatForm: FC = memo(() => {
   const autoFocus = (el: HTMLTextAreaElement) => (el ? el.focus() : null)
   const dispatch = useDispatch()
   const message = useSelector(selectMessage)
+  const photoURL = useSelector(selectPhotoURL)
+
   // 日本語入力判定用
   const [isJapaneseInput, setIsJapaneseInput] = useState(false)
 
@@ -16,10 +19,10 @@ export const ChatForm: FC = memo(() => {
       <div className="flex -space-x-2 overflow-hidden flex-col px-4">
         <img
           className="inline-block h-14 w-14 rounded-full ring-2 ring-white"
-          src="https://pbs.twimg.com/profile_images/1214321544/miura_3_400x400.JPG"
+          src={photoURL}
           alt=""
         />
-        <span className=""> {message.name}</span>
+        <span className="pl-1"> {message.name}</span>
       </div>
 
       <textarea

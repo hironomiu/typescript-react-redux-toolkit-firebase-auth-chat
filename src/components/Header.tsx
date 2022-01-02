@@ -15,7 +15,7 @@ export const Header: FC = memo(() => {
           {isAuthentication ? (
             <>
               <div className="py-6 md:ml-4 sm:ml-1">
-                <span className="p-3">Super Web Site!</span>
+                <span className="p-3">Super Chat!!</span>
                 <Link className="p-3 hover:bg-gray-500 rounded" to="/">
                   Top
                 </Link>

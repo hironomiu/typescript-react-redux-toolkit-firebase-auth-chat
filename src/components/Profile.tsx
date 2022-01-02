@@ -1,12 +1,7 @@
 import { FC, memo, useState } from 'react'
 import { storageRef } from '../firebase'
 import { useSelector } from 'react-redux'
-import {
-  selectUserName,
-  selectUserEmail,
-  selectUserPhotoURL,
-  selectUserUid,
-} from '../features/user/userSlice'
+import { selectUser } from '../features/user/userSlice'
 
 export const Profile: FC = memo(() => {
   const [preview, setPreview] = useState('')
@@ -16,20 +11,17 @@ export const Profile: FC = memo(() => {
     setPreview(window.URL.createObjectURL(files[0]))
     setImage(e.target.files.item(0))
   }
-  const name = useSelector(selectUserName)
-  const email = useSelector(selectUserEmail)
-  const photoURL = useSelector(selectUserPhotoURL)
-  const uid = useSelector(selectUserUid)
+  const user = useSelector(selectUser)
 
   return (
     <>
-      <div>{name}'s Profile</div>
-      {uid}:{email}
+      <div>{user.name}'s Profile</div>
+      email:{user.email}
       <div className="flex -space-x-2 overflow-hidden flex-col px-4">
-        {photoURL ? (
+        {user.photoURL ? (
           <img
             className="inline-block h-14 w-14 rounded-full ring-2 ring-white"
-            src={photoURL}
+            src={user.photoURL}
             alt=""
           />
         ) : (
@@ -48,7 +40,7 @@ export const Profile: FC = memo(() => {
       </div>
       <button
         onClick={() => {
-          storageRef.child('images/' + uid + '_avatar').put(image)
+          storageRef.child('images/' + user.uid + '_avatar').put(image)
         }}
       >
         アップロード

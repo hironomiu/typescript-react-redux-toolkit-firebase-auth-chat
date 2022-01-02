@@ -24,8 +24,19 @@ export const Profile: FC = memo(() => {
   return (
     <>
       <div>{name}'s Profile</div>
+      {uid}:{email}
+      <div className="flex -space-x-2 overflow-hidden flex-col px-4">
+        {photoURL ? (
+          <img
+            className="inline-block h-14 w-14 rounded-full ring-2 ring-white"
+            src={photoURL}
+            alt=""
+          />
+        ) : (
+          'no photo image'
+        )}
+      </div>
       <input type="file" name="" id="" onChange={handleChangeFile} />
-
       <div className="flex -space-x-2 overflow-hidden flex-col px-4">
         {preview ? (
           <img
@@ -33,23 +44,15 @@ export const Profile: FC = memo(() => {
             src={preview}
             alt=""
           />
-        ) : (
-          'no image'
-        )}
-        <button
-          onClick={() => {
-            // if (
-            //   typeof image === 'Blob' ||
-            //   typeof image === 'Uint8Array' ||
-            //   typeof image === 'ArrayBuffer'
-            // ) {
-            storageRef.child('images/hogehgoe').put(image)
-            // }
-          }}
-        >
-          アップロード
-        </button>
+        ) : null}
       </div>
+      <button
+        onClick={() => {
+          storageRef.child('images/' + uid + '_avatar').put(image)
+        }}
+      >
+        アップロード
+      </button>
     </>
   )
 })

@@ -5,7 +5,7 @@ import {
   selectDisplayName,
   selectUid,
 } from '../features/auth/authSlice'
-import { setUser } from '../features/user/userSlice'
+import { getFirebaseUser } from '../features/user/userSlice'
 import { setName, setUid, readMessages } from '../features/chat/chatSlice'
 import { ChatList, ChatForm } from '.'
 
@@ -19,7 +19,7 @@ export const Main: FC = memo(() => {
     if (isAuthentication) {
       dispatch(setName(displayName))
       dispatch(setUid(uid))
-      dispatch(setUser(uid))
+      dispatch(getFirebaseUser(uid))
     }
   }, [isAuthentication, displayName, dispatch, uid])
 

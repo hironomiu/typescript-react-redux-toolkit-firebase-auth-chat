@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
 import { database } from '../../firebase'
+import { Dispatch } from 'redux'
 
 type InitialState = {
   uid: string
@@ -16,31 +17,44 @@ const initialState: InitialState = {
   email: '',
 }
 
+export const getFirebaseUser =
+  (uid: string) => (dispath: Dispatch, getState: any) => {
+    console.log(uid)
+    const userRef = database.ref('users/' + uid)
+    userRef.on('value', (snapshot) => {
+      const user = snapshot.val()
+      if (!user) {
+        console.log('error')
+      } else {
+        console.log('user:', user)
+        const entries: any = Object.entries(user)
+
+        type Data = {
+          key: string
+          name: string
+          uid: string
+          photoURL: string
+          email: string
+        }
+        const data: Array<Data> = entries.map((data: any) => {
+          const [key, user] = data
+          return { key, ...user }
+        })
+        console.log('data:', data[0].name)
+        dispath(setUser(data))
+      }
+    })
+  }
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
     setUser: (state, action) => {
-      console.log(action)
-      const userRef = database.ref('users/' + action.payload)
-      userRef.on('value', (snapshot) => {
-        const user = snapshot.val()
-        if (!user) {
-          console.log('error')
-        } else {
-          console.log('user:', user)
-          const entries: any = Object.entries(user)
-          const data = entries.map((data: any) => {
-            const [key, user] = data
-            return { key, ...user }
-          })
-          console.log('data:', data[0].name)
-          state.name = data[0].name
-          state.uid = data[0].uid
-          state.photoURL = data[0].photoURL
-          state.email = data[0].email
-        }
-      })
+      state.name = action.payload[0].name
+      state.uid = action.payload[0].uid
+      state.photoURL = action.payload[0].photoURL
+      state.email = action.payload[0].email
     },
   },
 })

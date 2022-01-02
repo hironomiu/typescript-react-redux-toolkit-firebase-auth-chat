@@ -26,7 +26,6 @@ export const readMessages = () => (dispatch: Dispatch, getState: any) => {
     if (!messages) {
       return
     }
-    console.log('next')
     type Message = {
       name: string
       text: string

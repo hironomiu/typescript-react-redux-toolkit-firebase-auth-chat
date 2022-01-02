@@ -26,7 +26,6 @@ export const ChatForm: FC = memo(() => {
         className="p-2 focus:outline-gray-600 border-solid border-2"
         placeholder="チャットコメント"
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-          console.log(e.target.enterKeyHint)
           dispatch(setText(e.target.value))
         }}
         // CMD + Enter , CTRL + Enetr 対応(ただし日本語入力中は不可)

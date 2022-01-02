@@ -1,5 +1,9 @@
 # typescript-react-redux-toolkit-firebase-auth-chat
 
+Firebase Authentication(GitHub)で認証  
+Firebase Realtime Database でデータの管理  
+Firebase Storage でファイルの管理
+
 ## Create Memo
 
 ### React

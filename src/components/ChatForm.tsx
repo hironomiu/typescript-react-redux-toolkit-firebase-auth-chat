@@ -12,7 +12,16 @@ export const ChatForm: FC = memo(() => {
 
   return (
     <div className="flex items-center my-5 ">
-      <span className="mr-5">{message.name}</span>
+      {/* Tailwindでアバターの表示 */}
+      <div className="flex -space-x-2 overflow-hidden flex-col px-4">
+        <img
+          className="inline-block h-14 w-14 rounded-full ring-2 ring-white"
+          src="https://pbs.twimg.com/profile_images/1214321544/miura_3_400x400.JPG"
+          alt=""
+        />
+        <span className=""> {message.name}</span>
+      </div>
+
       <textarea
         className="p-2 focus:outline-gray-600 border-solid border-2"
         placeholder="チャットコメント"

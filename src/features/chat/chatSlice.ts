@@ -4,7 +4,7 @@ import { messagesRef } from '../../firebase'
 import { Dispatch } from 'redux'
 
 type InitialState = {
-  message: { name: string; text: string }
+  message: { uid: string; name: string; text: string }
   messages: Array<{
     key: string
     name: string
@@ -15,7 +15,7 @@ type InitialState = {
 }
 
 const initialState: InitialState = {
-  message: { name: '', text: '' },
+  message: { uid: '', name: '', text: '' },
   messages: [{ key: '', name: '', text: '', createdAt: '' }],
   readMessagesStatus: 'idle',
 }
@@ -50,6 +50,9 @@ export const chatSlice = createSlice({
   name: 'chat',
   initialState,
   reducers: {
+    setUid: (state, action) => {
+      state.message.uid = action.payload
+    },
     setName: (state, action) => {
       state.message.name = action.payload
     },
@@ -80,6 +83,6 @@ export const selectMessage = (state: RootState) => state.chat.message
 export const selectMessages = (state: RootState) => state.chat.messages
 export const selectReadMessagesStatus = (state: RootState) =>
   state.chat.readMessagesStatus
-export const { setName, setText, setMessages, setReadMessageStatus } =
+export const { setUid, setName, setText, setMessages, setReadMessageStatus } =
   chatSlice.actions
 export default chatSlice.reducer

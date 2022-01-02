@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-import { socialMediaAuth, GithubProvider, auth } from '../../firebase'
+import { socialMediaAuth, GithubProvider, auth, pushUser } from '../../firebase'
 
 const initialState = {
   isAuthentication: false,
@@ -15,6 +15,9 @@ export const authentication = createAsyncThunk(
   'auth/authentication',
   async (provider: GithubProvider) => {
     const res = await socialMediaAuth(provider)
+    if (res?.email && res?.displayName && res.uid) {
+      pushUser({ email: res.email, name: res.displayName, uid: res.uid })
+    }
     return { email: res?.email, displayName: res?.displayName, uid: res?.uid }
   }
 )
@@ -43,8 +46,15 @@ export const authSlice = createSlice({
         state.authenticationStatus = 'loading'
       })
       .addCase(authentication.fulfilled, (state, action) => {
-        if (action.payload?.displayName) {
+        if (
+          action.payload.displayName &&
+          action.payload.uid &&
+          action.payload.email
+        ) {
           state.isAuthentication = true
+          state.uid = action.payload.uid
+          state.displayName = action.payload.displayName
+          state.email = action.payload.email
         }
         state.authenticationStatus = 'idle'
       })
@@ -56,7 +66,7 @@ export const authSlice = createSlice({
 
 export const checkAuthentication = () => (dispatch: any) => {
   auth.onAuthStateChanged((user) => {
-    if (user?.email && user?.displayName) {
+    if (user?.email && user?.displayName && user.uid) {
       dispatch(
         setUser({
           email: user.email,

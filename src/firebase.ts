@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/database'
 import 'firebase/compat/auth'
+import 'firebase/compat/storage'
 
 const {
   REACT_APP_FIREBASE_API_KEY,
@@ -26,6 +27,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
+// Authentication
+
 export type GithubProvider = firebase.auth.GithubAuthProvider
 
 export const githubProvider: firebase.auth.GithubAuthProvider =
@@ -45,21 +48,56 @@ export const socialMediaAuth = async (
   }
 }
 
+// Realtime Database
 const database = firebase.database()
+
+// Realtime Database users
+
+// export const usersRef = database.ref('users')
+
+type PostUser = {
+  name: string
+  uid: string
+  email: string
+}
+
+export const pushUser = ({ name, uid, email }: PostUser) => {
+  const usersRef = database.ref('users/' + uid)
+  usersRef.on('value', (snapshot) => {
+    const user = snapshot.val()
+    if (!user) {
+      usersRef.push({
+        name,
+        uid,
+        email,
+        createdAt: firebase.database.ServerValue.TIMESTAMP,
+      })
+    }
+  })
+}
+
+// Realtime Database messages
+
 export const messagesRef = database.ref('message')
 
 type Message = {
   name: string
   text: string
+  uid: string
 }
-export const pushMessage = ({ name, text }: Message) => {
-  console.log('hoge:', name, text)
+export const pushMessage = ({ name, text, uid }: Message) => {
   const createdAt = new Date()
   console.log(createdAt)
   messagesRef.push({
     name,
     text,
+    uid,
     createdAt: firebase.database.ServerValue.TIMESTAMP,
   })
   // messagesRef.push({ name: 'hironomiu', text: 'hoge' })
 }
+
+// Storage
+
+const storage = firebase.storage()
+export const storageRef = storage.ref()

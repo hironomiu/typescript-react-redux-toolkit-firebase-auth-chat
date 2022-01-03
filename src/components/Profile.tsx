@@ -1,4 +1,4 @@
-import { FC, memo, useState } from 'react'
+import React, { FC, memo, useState, useRef } from 'react'
 import { storageRef } from '../firebase'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../features/user/userSlice'
@@ -6,12 +6,20 @@ import { selectUser } from '../features/user/userSlice'
 export const Profile: FC = memo(() => {
   const [preview, setPreview] = useState('')
   const [image, setImage] = useState<any>()
-  const handleChangeFile = (e: any) => {
-    const { files } = e.target
+  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    console.log(files)
+    if (!files) return
+    if (files.length === 0) {
+      setPreview('')
+      setImage('')
+      return
+    }
     setPreview(window.URL.createObjectURL(files[0]))
-    setImage(e.target.files.item(0))
+    setImage(files.item(0))
   }
   const user = useSelector(selectUser)
+  let inputRef = useRef<HTMLInputElement | null>(null)
 
   return (
     <>
@@ -28,7 +36,13 @@ export const Profile: FC = memo(() => {
           'no photo image'
         )}
       </div>
-      <input type="file" name="" id="" onChange={handleChangeFile} />
+      <input
+        type="file"
+        ref={inputRef}
+        name=""
+        id=""
+        onChange={handleChangeFile}
+      />
       <div className="flex -space-x-2 overflow-hidden flex-col px-4">
         {preview ? (
           <img
@@ -39,8 +53,15 @@ export const Profile: FC = memo(() => {
         ) : null}
       </div>
       <button
-        onClick={() => {
-          storageRef.child('images/' + user.uid + '_avatar').put(image)
+        onClick={async () => {
+          const ref = storageRef
+            .child('images/' + user.uid + '_avatar')
+            .put(image)
+          const url = await ref.snapshot.ref.getDownloadURL()
+          window.confirm(url)
+          setPreview('')
+          setImage('')
+          inputRef.current = null
         }}
       >
         アップロード

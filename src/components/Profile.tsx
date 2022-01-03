@@ -1,4 +1,4 @@
-import React, { FC, memo, useState, useRef } from 'react'
+import React, { FC, memo, useState } from 'react'
 import { storageRef } from '../firebase'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../features/user/userSlice'
@@ -6,6 +6,7 @@ import { selectUser } from '../features/user/userSlice'
 export const Profile: FC = memo(() => {
   const [preview, setPreview] = useState('')
   const [image, setImage] = useState<any>()
+  const [key, setKey] = useState(1)
   const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     console.log(files)
@@ -19,7 +20,6 @@ export const Profile: FC = memo(() => {
     setImage(files.item(0))
   }
   const user = useSelector(selectUser)
-  let inputRef = useRef<HTMLInputElement | null>(null)
 
   return (
     <>
@@ -36,13 +36,8 @@ export const Profile: FC = memo(() => {
           'no photo image'
         )}
       </div>
-      <input
-        type="file"
-        ref={inputRef}
-        name=""
-        id=""
-        onChange={handleChangeFile}
-      />
+      {/* keyを設定することでアップロード後に選択をクリアする */}
+      <input key={key} type="file" name="" id="" onChange={handleChangeFile} />
       <div className="flex -space-x-2 overflow-hidden flex-col px-4">
         {preview ? (
           <img
@@ -61,7 +56,7 @@ export const Profile: FC = memo(() => {
           window.confirm(url)
           setPreview('')
           setImage('')
-          inputRef.current = null
+          setKey((key) => key + 1)
         }}
       >
         アップロード

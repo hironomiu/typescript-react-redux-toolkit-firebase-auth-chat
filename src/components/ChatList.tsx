@@ -1,7 +1,7 @@
 import { FC, useLayoutEffect, useRef, memo } from 'react'
 import { useSelector } from 'react-redux'
 import { selectMessages } from '../features/chat/chatSlice'
-import { Message } from '.'
+import { ChatMessage } from '.'
 
 export const ChatList: FC = memo(() => {
   const messages = useSelector(selectMessages)
@@ -18,7 +18,7 @@ export const ChatList: FC = memo(() => {
         {messages[0].key === ''
           ? ''
           : messages?.map((message) => (
-              <Message
+              <ChatMessage
                 key={message.key}
                 name={message.name}
                 text={message.text}

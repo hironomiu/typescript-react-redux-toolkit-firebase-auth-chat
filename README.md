@@ -73,6 +73,18 @@ modify `index.css`
 @tailwind utilities;
 ```
 
+### @headlessui/react
+
+```
+yarn add @headlessui/react
+```
+
+### @heroicons/react
+
+```
+yarn add @heroicons/react
+```
+
 ### GitHub
 
 アカウント -> Settings -> Developer settings -> OAuth Apps -> New OAuth App

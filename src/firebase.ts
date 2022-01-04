@@ -78,7 +78,7 @@ export const pushUser = ({ name, uid, email, photoURL }: PostUser) => {
 
 // Realtime Database messages
 
-export const messagesRef = database.ref('message')
+export const messagesRef = database.ref('messages')
 
 type Message = {
   name: string
@@ -86,8 +86,6 @@ type Message = {
   uid: string
 }
 export const pushMessage = ({ name, text, uid }: Message) => {
-  const createdAt = new Date()
-  console.log(createdAt)
   messagesRef.push({
     name,
     text,

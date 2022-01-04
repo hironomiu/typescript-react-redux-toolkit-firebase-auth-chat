@@ -9,7 +9,7 @@ import { getFirebaseUser } from '../features/user/userSlice'
 import { setName, setUid, readMessages } from '../features/chat/chatSlice'
 import { ChatList, ChatForm } from '.'
 
-export const Main: FC = memo(() => {
+export const Chat: FC = memo(() => {
   const dispatch = useDispatch()
   const isAuthentication = useSelector(selectIsAuthentication)
   const displayName = useSelector(selectDisplayName)

@@ -6,7 +6,7 @@ type Props = {
   createdAt: string
 }
 
-export const Message: FC<Props> = memo(({ name, text, createdAt }) => {
+export const ChatMessage: FC<Props> = memo(({ name, text, createdAt }) => {
   const dateTime = new Date(createdAt)
   return (
     <div className="flex flex-col m-2">

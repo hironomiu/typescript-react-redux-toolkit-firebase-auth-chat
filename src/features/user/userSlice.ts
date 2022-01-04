@@ -4,23 +4,27 @@ import { database } from '../../firebase'
 import { Dispatch } from 'redux'
 
 type InitialState = {
-  user: { uid: string; name: string; photoURL: string; email: string }
+  user: {
+    key: string
+    uid: string
+    name: string
+    photoURL: string
+    email: string
+  }
 }
 
 const initialState: InitialState = {
-  user: { uid: '', name: '', photoURL: '', email: '' },
+  user: { key: '', uid: '', name: '', photoURL: '', email: '' },
 }
 
 export const getFirebaseUser =
   (uid: string) => (dispath: Dispatch, getState: any) => {
-    console.log(uid)
     const userRef = database.ref('users/' + uid)
     userRef.on('value', (snapshot) => {
       const user = snapshot.val()
       if (!user) {
         console.log('error')
       } else {
-        console.log('user:', user)
         const entries: any = Object.entries(user)
 
         type Data = {
@@ -34,10 +38,17 @@ export const getFirebaseUser =
           const [key, user] = data
           return { key, ...user }
         })
-        console.log('data:', data[0].name)
         dispath(setUser(data))
       }
     })
+  }
+
+export const updateFirebaseUser =
+  (uid: string, url: string) => (dispatch: Dispatch, getState: any) => {
+    const state = selectUser(getState())
+    const userRef = database.ref('users/' + uid + '/' + state.key)
+    userRef.update({ photoURL: url })
+    dispatch(setPhotoURL(url))
   }
 
 export const userSlice = createSlice({
@@ -45,14 +56,18 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
+      state.user.key = action.payload[0].key
       state.user.name = action.payload[0].name
       state.user.uid = action.payload[0].uid
       state.user.photoURL = action.payload[0].photoURL
       state.user.email = action.payload[0].email
     },
+    setPhotoURL: (state, action) => {
+      state.user.photoURL = action.payload
+    },
   },
 })
 
 export const selectUser = (state: RootState) => state.user.user
-export const { setUser } = userSlice.actions
+export const { setUser, setPhotoURL } = userSlice.actions
 export default userSlice.reducer

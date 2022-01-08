@@ -9,13 +9,15 @@ Firebase Storage でファイルの管理
 ### React
 
 ```
-npx create-react-app --template typescript
+yarn create react-app --template typescript
 ```
 
 or
 
+下記実行で script の実行が`npm`となった場合は以降の`yarn`の箇所は全て`npm`に読み替える
+
 ```
-yarn create react-app --template typescript
+npx create-react-app --template typescript
 ```
 
 ### firebase

@@ -25,7 +25,7 @@ export const Header: FC = memo(() => {
               </div>
               <div className="py-3 md:mr-4 sm:mr-1">
                 <button
-                  className=" p-3 hover:bg-gray-500 rounded "
+                  className="p-3 hover:bg-gray-500 rounded "
                   onClick={() => dispatch(signOut())}
                 >
                   SignOut

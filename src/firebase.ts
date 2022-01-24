@@ -92,7 +92,6 @@ export const pushMessage = ({ name, text, uid }: Message) => {
     uid,
     createdAt: firebase.database.ServerValue.TIMESTAMP,
   })
-  // messagesRef.push({ name: 'hironomiu', text: 'hoge' })
 }
 
 // Storage

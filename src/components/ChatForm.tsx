@@ -1,6 +1,6 @@
 import { FC, memo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { pushMessage } from '../firebase'
+import { pushMessage } from '../firebase/firebase'
 import { setText, selectMessage } from '../features/chat/chatSlice'
 import { selectUser } from '../features/user/userSlice'
 
@@ -11,7 +11,7 @@ export const ChatForm: FC = memo(() => {
   const user = useSelector(selectUser)
 
   // 日本語入力判定用
-  const [isJapaneseInput, setIsJapaneseInput] = useState(false)
+  const [isJapaneseInput, setIsInputJapanese] = useState(false)
 
   return (
     <div className="flex items-center my-5 ">
@@ -46,11 +46,11 @@ export const ChatForm: FC = memo(() => {
         }}
         // 日本語入力開始
         onCompositionStart={() => {
-          setIsJapaneseInput(true)
+          setIsInputJapanese(true)
         }}
         // 日本語入力終了
         onCompositionEnd={() => {
-          setIsJapaneseInput(false)
+          setIsInputJapanese(false)
         }}
         value={message.text}
         ref={autoFocus}

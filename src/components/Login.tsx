@@ -1,5 +1,5 @@
 import { FC, memo, useEffect } from 'react'
-import { githubProvider } from '../firebase'
+import { githubProvider } from '../firebase/firebase'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {

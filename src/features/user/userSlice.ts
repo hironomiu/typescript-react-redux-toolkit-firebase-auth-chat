@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-import { database } from '../../firebase'
+import { database, getUserRef } from '../../firebase/firebase'
+import { onValue, set, ref } from 'firebase/database'
 import { Dispatch } from 'redux'
 
 type InitialState = {
@@ -19,8 +20,8 @@ const initialState: InitialState = {
 
 export const getFirebaseUser =
   (uid: string) => (dispath: Dispatch, getState: any) => {
-    const userRef = database.ref('users/' + uid)
-    userRef.on('value', (snapshot) => {
+    const userRef = getUserRef(uid)
+    onValue(userRef, (snapshot) => {
       const user = snapshot.val()
       if (!user) {
         console.log('error')
@@ -46,8 +47,11 @@ export const getFirebaseUser =
 export const updateFirebaseUser =
   (uid: string, url: string) => (dispatch: Dispatch, getState: any) => {
     const state = selectUser(getState())
-    const userRef = database.ref('users/' + uid + '/' + state.key)
-    userRef.update({ photoURL: url })
+    // const userRef = getUserRef(uid + '/' + state.key)
+    set(ref(database, 'users/' + uid + '/' + state.key), {
+      photoURL: url,
+    })
+
     dispatch(setPhotoURL(url))
   }
 

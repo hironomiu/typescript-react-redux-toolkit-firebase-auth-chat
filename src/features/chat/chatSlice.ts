@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-import { messagesRef } from '../../firebase'
+import { messagesRef } from '../../firebase/firebase'
+import { onValue } from 'firebase/database'
 import { Dispatch } from 'redux'
 
 type InitialState = {
@@ -21,7 +22,7 @@ const initialState: InitialState = {
 }
 
 export const readMessages = () => (dispatch: Dispatch, getState: any) => {
-  messagesRef.orderByKey().on('value', (snapshot) => {
+  onValue(messagesRef, (snapshot) => {
     const messages = snapshot.val()
     if (!messages) {
       return
@@ -42,6 +43,7 @@ export const readMessages = () => (dispatch: Dispatch, getState: any) => {
     })
     dispatch(setMessages(newMessages))
   })
+
   return
 }
 

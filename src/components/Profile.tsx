@@ -1,8 +1,9 @@
 import React, { FC, memo, useState } from 'react'
-import { storageRef } from '../firebase'
+import { storage } from '../firebase/firebase'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectUser, updateFirebaseUser } from '../features/user/userSlice'
 import { MessageModal } from './'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 export const Profile: FC = memo(() => {
   const [preview, setPreview] = useState('')
@@ -69,16 +70,26 @@ export const Profile: FC = memo(() => {
           </div>
           <button
             onClick={async () => {
-              const ref = storageRef
-                .child('images/' + user.uid + '_avatar')
-                .put(image)
-              const url = await ref.snapshot.ref.getDownloadURL()
+              const sRef = ref(storage, 'images/' + user.uid + '_avatar')
+              console.log('called')
+              uploadBytes(sRef, image)
+                .then((snapshot) => {
+                  console.log('ok')
+                })
+                .catch((err) => console.log(err))
+              getDownloadURL(
+                ref(storage, 'images/' + user.uid + '_avatar')
+              ).then((url) => {
+                dispatch(updateFirebaseUser(user.uid, url))
+              })
+
+              // const url = await res(snapshot => snapshot.ref.getDownloadURL())
               setModalOn(true)
               setPreview('')
               setImage('')
               setKey((key) => key + 1)
               setIsEntry((isEntry) => !isEntry)
-              dispatch(updateFirebaseUser(user.uid, url))
+              // dispatch(updateFirebaseUser(user.uid, url))
             }}
           >
             アップロード

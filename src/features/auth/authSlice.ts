@@ -1,6 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-import { socialMediaAuth, GithubProvider, auth, pushUser } from '../../firebase'
+import {
+  socialMediaAuth,
+  GithubProvider,
+  auth,
+  pushUser,
+} from '../../firebase/firebase'
 
 const initialState = {
   isAuthentication: false,

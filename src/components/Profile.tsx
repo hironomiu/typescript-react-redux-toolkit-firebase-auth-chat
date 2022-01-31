@@ -24,6 +24,7 @@ export const Profile: FC = memo(() => {
     setImage(files.item(0))
   }
   const user = useSelector(selectUser)
+  console.log('profile user:', user)
 
   return (
     <div className="flex flex-col items-center ">
@@ -70,6 +71,7 @@ export const Profile: FC = memo(() => {
           </div>
           <button
             onClick={async () => {
+              console.log(user)
               const sRef = ref(storage, 'images/' + user.uid + '_avatar')
               console.log('called')
               uploadBytes(sRef, image)

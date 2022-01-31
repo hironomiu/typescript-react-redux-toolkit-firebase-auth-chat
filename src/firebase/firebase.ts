@@ -8,6 +8,7 @@ import {
   ref,
   onValue,
   set,
+  push,
   serverTimestamp,
 } from 'firebase/database'
 import { getStorage, ref as sRef } from 'firebase/storage'
@@ -53,7 +54,7 @@ export const pushUser = ({ name, uid, email, photoURL }: PostUser) => {
         uid,
         email,
         photoURL,
-        createdAt: serverTimestamp,
+        createdAt: serverTimestamp(),
       })
     }
   })
@@ -72,11 +73,13 @@ type Message = {
   uid: string
 }
 export const pushMessage = ({ name, text, uid }: Message) => {
-  set(ref(database, 'messages/'), {
+  console.log('called')
+
+  push(ref(database, 'messages'), {
     name,
     text,
     uid,
-    createdAt: serverTimestamp,
+    createdAt: serverTimestamp(),
   })
 }
 

@@ -20,14 +20,17 @@ const initialState: InitialState = {
 
 export const getFirebaseUser =
   (uid: string) => (dispath: Dispatch, getState: any) => {
+    console.log('called3 uid:', uid)
     const userRef = getUserRef(uid)
     onValue(userRef, (snapshot) => {
       const user = snapshot.val()
+      console.log('get user:', user)
       if (!user) {
         console.log('error')
       } else {
-        const entries: any = Object.entries(user)
+        // const entries: any = Object.entries(user)
 
+        // console.log(entries)
         type Data = {
           key: string
           name: string
@@ -35,11 +38,13 @@ export const getFirebaseUser =
           photoURL: string
           email: string
         }
-        const data: Array<Data> = entries.map((data: any) => {
-          const [key, user] = data
-          return { key, ...user }
-        })
-        dispath(setUser(data))
+        // const data: Array<Data> = entries.map((data: any) => {
+        //   const [key, user] = data
+        //   return { key, ...user }
+        // })
+        // dispath(setUser(data))
+        console.log({ key: uid, ...user })
+        dispath(setUser({ key: uid, ...user }))
       }
     })
   }
@@ -60,11 +65,12 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.user.key = action.payload[0].key
-      state.user.name = action.payload[0].name
-      state.user.uid = action.payload[0].uid
-      state.user.photoURL = action.payload[0].photoURL
-      state.user.email = action.payload[0].email
+      console.log('action.payload:', action.payload)
+      state.user.key = action.payload.key
+      state.user.name = action.payload.name
+      state.user.uid = action.payload.uid
+      state.user.photoURL = action.payload.photoURL
+      state.user.email = action.payload.email
     },
     setPhotoURL: (state, action) => {
       state.user.photoURL = action.payload

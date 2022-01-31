@@ -22,6 +22,7 @@ const initialState: InitialState = {
 }
 
 export const readMessages = () => (dispatch: Dispatch, getState: any) => {
+  console.log('called 2')
   onValue(messagesRef, (snapshot) => {
     const messages = snapshot.val()
     if (!messages) {

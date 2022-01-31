@@ -13,13 +13,11 @@ const useChat = () => {
   const isAuthentication = useSelector(selectIsAuthentication)
   const displayName = useSelector(selectDisplayName)
   const uid = useSelector(selectUid)
-  console.log('useChat uid:', uid)
 
   useEffect(() => {
     if (isAuthentication) {
       dispatch(setName(displayName))
       dispatch(setUid(uid))
-      console.log('uid:', uid)
       dispatch(getFirebaseUser(uid))
     }
   }, [isAuthentication, displayName, dispatch, uid])

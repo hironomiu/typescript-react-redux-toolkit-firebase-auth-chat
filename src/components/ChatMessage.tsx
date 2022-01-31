@@ -8,9 +8,6 @@ type Props = {
 
 export const ChatMessage: FC<Props> = memo(({ name, text, createdAt }) => {
   const dateTime = new Date(createdAt)
-  console.log(createdAt)
-  console.log(dateTime)
-  console.log(name)
   return (
     <div className="flex flex-col m-2">
       <span className="text-gray-700 font-bold text-sm">

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
 import { database, getUserRef } from '../../firebase/firebase'
-import { onValue, set, ref } from 'firebase/database'
+import { onValue, set, ref, serverTimestamp } from 'firebase/database'
 import { Dispatch } from 'redux'
 
 type InitialState = {
@@ -53,10 +53,17 @@ export const updateFirebaseUser =
   (uid: string, url: string) => (dispatch: Dispatch, getState: any) => {
     const state = selectUser(getState())
     // const userRef = getUserRef(uid + '/' + state.key)
-    set(ref(database, 'users/' + uid + '/' + state.key), {
+    // set(ref(database, 'users/' + uid + '/' + state.key), {
+    //   photoURL: url,
+    // })
+    console.log('state:', state)
+    set(ref(database, 'users/' + uid), {
+      uid: state.uid,
+      name: state.name,
+      email: state.email,
+      createdAt: serverTimestamp(),
       photoURL: url,
     })
-
     dispatch(setPhotoURL(url))
   }
 

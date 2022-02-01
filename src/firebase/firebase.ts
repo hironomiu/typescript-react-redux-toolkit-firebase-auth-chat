@@ -73,8 +73,6 @@ type Message = {
   uid: string
 }
 export const pushMessage = ({ name, text, uid }: Message) => {
-  console.log('called')
-
   push(ref(database, 'messages'), {
     name,
     text,

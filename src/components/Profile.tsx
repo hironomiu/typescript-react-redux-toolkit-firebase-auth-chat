@@ -97,7 +97,10 @@ export const Profile: FC = memo(() => {
           </button>
         </>
       ) : (
-        <span onClick={() => setIsEntry((isEntry) => !isEntry)}>
+        <span
+          className="hover:cursor-pointer"
+          onClick={() => setIsEntry((isEntry) => !isEntry)}
+        >
           アバター画像を登録する
         </span>
       )}

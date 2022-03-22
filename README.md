@@ -4,7 +4,27 @@ Firebase Authentication(GitHub)で認証
 Firebase Realtime Database でデータの管理  
 Firebase Storage でファイルの管理
 
-## Create Memo
+## Run
+
+```
+yarn start
+```
+
+## Build
+
+```
+yarn run build
+```
+
+## Testing
+
+`src/__tests__`に配置
+
+```
+yarn test
+```
+
+## Install Memo
 
 ### React
 
@@ -92,3 +112,45 @@ yarn add @heroicons/react
 アカウント -> Settings -> Developer settings -> OAuth Apps -> New OAuth App
 
 取得した「Client ID」「Client secrets」を Firebase Auth で設定する
+
+## Deploy
+
+Firebase -> Hosting -> はじめる
+
+```
+yarn add --dev firebase-tools
+```
+
+つぎへ
+
+```
+npx firebase login
+npx firebase init
+```
+
+`? Which Firebase features do you want to set up for this directory? Press Space to select features, then Enter to confirm your choices. ` -> `❯◉ Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys`
+
+`? Please select an option:` -> `❯ Use an existing project `
+
+`? Select a default Firebase project for this directory:` -> `❯ auth-chat-sample (auth-chat-sample) `
+
+`? What do you want to use as your public directory?` -> `build`
+
+`? Configure as a single-page app (rewrite all urls to /index.html)?` -> `y`
+
+`? Set up automatic builds and deploys with GitHub?` -> `y`
+
+`? For which GitHub repository would you like to set up a GitHub workflow? (format: user/repository)` -> リポジトリが選択されていることを確認しエンター
+
+`? Set up the workflow to run a build script before every deploy? ` -> `yarn install && yarn build`
+
+`? Set up automatic deployment to your site's live channel when a PR is merged?` -> `y`
+
+`? What is the name of the GitHub branch associated with your site's live channel?` -> `main`
+
+つぎへ
+
+```
+yarn run build
+npx firebase deploy
+```

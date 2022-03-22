@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
-import App from './App'
+import { Footer } from '../components/Footer'
 
 test('renders learn react link', () => {
-  render(<App />)
-  const linkElement = screen.getByText(/Super Chat!!/i)
+  render(<Footer />)
+  const linkElement = screen.getByText(/Super Chat!!@2022/i)
   expect(linkElement).toBeInTheDocument()
 })

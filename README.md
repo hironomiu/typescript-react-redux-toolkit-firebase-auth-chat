@@ -1,5 +1,7 @@
 # typescript-react-redux-toolkit-firebase-auth-chat
 
+[![Deploy to Firebase Hosting on merge](https://github.com/hironomiu/typescript-react-redux-toolkit-firebase-auth-chat/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/hironomiu/typescript-react-redux-toolkit-firebase-auth-chat/actions/workflows/firebase-hosting-merge.yml)
+
 Firebase Authentication(GitHub)で認証  
 Firebase Realtime Database でデータの管理  
 Firebase Storage でファイルの管理

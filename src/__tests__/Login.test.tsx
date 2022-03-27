@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from '../app/store'
 describe('Login', () => {
-  it('render test cases', () => {
+  it('Login Page rendered cases', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
@@ -14,5 +14,6 @@ describe('Login', () => {
       </BrowserRouter>
     )
     expect(screen.getByText('GitHub Lgoin!')).toBeInTheDocument()
+    expect(screen.getByTestId('github-login-button')).toBeTruthy()
   })
 })

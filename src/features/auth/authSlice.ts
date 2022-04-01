@@ -7,7 +7,16 @@ import {
   pushUser,
 } from '../../firebase/firebase'
 
-const initialState = {
+export type InitialState = {
+  isAuthentication: boolean
+  authenticationStatus: 'idle' | 'loading'
+  email: string
+  displayName: string
+  uid: string
+  photoURL: string
+}
+
+const initialState: InitialState = {
   isAuthentication: false,
   authenticationStatus: 'idle',
   // checkAuthenticationStatus: 'idle',

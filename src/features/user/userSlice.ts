@@ -4,7 +4,7 @@ import { database, getUserRef } from '../../firebase/firebase'
 import { onValue, set, ref } from 'firebase/database'
 import { Dispatch } from 'redux'
 
-type InitialState = {
+export type InitialState = {
   user: {
     uid: string
     name: string

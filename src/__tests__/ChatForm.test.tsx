@@ -5,6 +5,7 @@ import chatReducer from '../features/chat/chatSlice'
 import userReducer from '../features/user/userSlice'
 import { ChatForm } from '../components/ChatForm'
 import { Provider } from 'react-redux'
+import userEvent from '@testing-library/user-event'
 
 let store: any
 
@@ -27,5 +28,10 @@ describe('ChatForm', () => {
       </Provider>
     )
     expect(screen.getByTestId('profile-img')).toBeInTheDocument()
+    expect(screen.getByRole('button')).toHaveAttribute('disabled')
+    userEvent.type(screen.getByRole('textbox'), 'test')
+    expect(screen.getByRole('textbox')).toHaveValue('test')
+    // TODO sendMessage.nameに何か設定する
+    // expect(screen.getByRole('button')).not.toHaveAttribute('disabled')
   })
 })

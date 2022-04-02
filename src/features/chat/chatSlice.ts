@@ -4,43 +4,42 @@ import { messagesRef } from '../../firebase/firebase'
 import { onValue } from 'firebase/database'
 import { Dispatch } from 'redux'
 
-type InitialState = {
-  message: { uid: string; name: string; text: string }
-  messages: Array<{
-    key: string
-    name: string
-    text: string
-    createdAt: string
-  }>
+type SendMessage = {
+  uid: string
+  name: string
+  text: string
+}
+
+type Message = {
+  name: string
+  text: string
+  uid: string
+  createdAt: number
+}
+export type InitialState = {
+  sendMessage: SendMessage
+  messages: Array<Message & { key: string }>
   readMessagesStatus: 'idle' | 'loading'
 }
 
 const initialState: InitialState = {
-  message: { uid: '', name: '', text: '' },
-  messages: [{ key: '', name: '', text: '', createdAt: '' }],
+  sendMessage: { uid: '', name: '', text: '' },
+  messages: [{ key: '', name: '', text: '', uid: '', createdAt: 0 }],
   readMessagesStatus: 'idle',
 }
 
-export const readMessages = () => (dispatch: Dispatch, getState: any) => {
+export const readMessages = () => (dispatch: Dispatch) => {
   onValue(messagesRef, (snapshot) => {
     const messages = snapshot.val()
-    if (!messages) {
-      return
-    }
-    type Message = {
-      name: string
-      text: string
-    }
+    if (!messages) return
+
     const entries: Array<[string, Message]> = Object.entries(messages)
-    type NewMessage = {
-      key: string
-      name: string
-      text: string
-    }
-    const newMessages: Array<NewMessage> = entries.map((data) => {
-      const [key, message] = data
-      return { key, ...message }
-    })
+    const newMessages: Array<Message & { key: string }> = entries.map(
+      (data) => {
+        const [key, message] = data
+        return { key, ...message }
+      }
+    )
     dispatch(setMessages(newMessages))
   })
 
@@ -52,13 +51,13 @@ export const chatSlice = createSlice({
   initialState,
   reducers: {
     setUid: (state, action) => {
-      state.message.uid = action.payload
+      state.sendMessage.uid = action.payload
     },
     setName: (state, action) => {
-      state.message.name = action.payload
+      state.sendMessage.name = action.payload
     },
     setText: (state, action) => {
-      state.message.text = action.payload
+      state.sendMessage.text = action.payload
     },
     setMessages: (state, action) => {
       state.messages = action.payload
@@ -80,7 +79,7 @@ export const chatSlice = createSlice({
   },
 })
 
-export const selectMessage = (state: RootState) => state.chat.message
+export const selectSendMessage = (state: RootState) => state.chat.sendMessage
 export const selectMessages = (state: RootState) => state.chat.messages
 export const selectReadMessagesStatus = (state: RootState) =>
   state.chat.readMessagesStatus

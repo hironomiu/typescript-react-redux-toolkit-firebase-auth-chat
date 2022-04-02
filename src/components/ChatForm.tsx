@@ -1,13 +1,13 @@
 import { FC, memo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { pushMessage } from '../firebase/firebase'
-import { setText, selectMessage } from '../features/chat/chatSlice'
+import { setText, selectSendMessage } from '../features/chat/chatSlice'
 import { selectUser } from '../features/user/userSlice'
 
 export const ChatForm: FC = memo(() => {
   const autoFocus = (el: HTMLTextAreaElement) => (el ? el.focus() : null)
   const dispatch = useDispatch()
-  const message = useSelector(selectMessage)
+  const sendMessage = useSelector(selectSendMessage)
   const user = useSelector(selectUser)
 
   // 日本語入力判定用
@@ -22,7 +22,7 @@ export const ChatForm: FC = memo(() => {
           src={user.photoURL}
           alt=""
         />
-        <span className="pl-1"> {message.name}</span>
+        <span className="pl-1"> {sendMessage.name}</span>
       </div>
 
       <textarea
@@ -38,8 +38,8 @@ export const ChatForm: FC = memo(() => {
             e.key === 'Enter' &&
             !isJapaneseInput
           ) {
-            if (message.text.length !== 0) {
-              pushMessage(message)
+            if (sendMessage.text.length !== 0) {
+              pushMessage(sendMessage)
               dispatch(setText(''))
             }
           }
@@ -52,14 +52,14 @@ export const ChatForm: FC = memo(() => {
         onCompositionEnd={() => {
           setIsInputJapanese(false)
         }}
-        value={message.text}
+        value={sendMessage.text}
         ref={autoFocus}
       ></textarea>
       <button
         className="mx-2 px-5 bg-gray-300 rounded focus:outline-gray-600 border-solid border-2 disabled:bg-gray-50 disabled:text-white"
-        disabled={!message.name || !message.text}
+        disabled={!sendMessage.name || !sendMessage.text}
         onClick={() => {
-          pushMessage(message)
+          pushMessage(sendMessage)
           dispatch(setText(''))
         }}
       >

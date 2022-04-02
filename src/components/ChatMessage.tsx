@@ -3,7 +3,7 @@ import { FC, memo } from 'react'
 type Props = {
   name: string
   text: string
-  createdAt: string
+  createdAt: number
 }
 
 // TODO 切り出す

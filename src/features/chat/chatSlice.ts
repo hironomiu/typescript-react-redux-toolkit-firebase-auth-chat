@@ -19,13 +19,11 @@ type Message = {
 export type InitialState = {
   sendMessage: SendMessage
   messages: Array<Message & { key: string }>
-  readMessagesStatus: 'idle' | 'loading'
 }
 
 const initialState: InitialState = {
   sendMessage: { uid: '', name: '', text: '' },
   messages: [{ key: '', name: '', text: '', uid: '', createdAt: 0 }],
-  readMessagesStatus: 'idle',
 }
 
 export const readMessages = () => (dispatch: Dispatch) => {
@@ -62,9 +60,6 @@ export const chatSlice = createSlice({
     setMessages: (state, action) => {
       state.messages = action.payload
     },
-    setReadMessageStatus: (state, action) => {
-      state.readMessagesStatus = action.payload
-    },
   },
   extraReducers: (builder) => {
     // builder
@@ -81,8 +76,6 @@ export const chatSlice = createSlice({
 
 export const selectSendMessage = (state: RootState) => state.chat.sendMessage
 export const selectMessages = (state: RootState) => state.chat.messages
-export const selectReadMessagesStatus = (state: RootState) =>
-  state.chat.readMessagesStatus
-export const { setUid, setName, setText, setMessages, setReadMessageStatus } =
-  chatSlice.actions
+
+export const { setUid, setName, setText, setMessages } = chatSlice.actions
 export default chatSlice.reducer

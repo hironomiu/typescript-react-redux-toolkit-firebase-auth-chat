@@ -4,7 +4,6 @@ import reducer, {
   setName,
   setText,
   setMessages,
-  setReadMessageStatus,
 } from '../features/chat/chatSlice'
 const initialState: InitialState = {
   sendMessage: {
@@ -21,7 +20,6 @@ const initialState: InitialState = {
       uid: '',
     },
   ],
-  readMessagesStatus: 'idle',
 }
 describe('chatSlice', () => {
   describe('setUid', () => {

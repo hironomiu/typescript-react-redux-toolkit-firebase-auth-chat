@@ -21,6 +21,7 @@ export const ChatForm: FC = memo(() => {
           className="inline-block h-14 w-14 rounded-full ring-2 ring-white"
           src={user.photoURL}
           alt=""
+          data-testid="profile-img"
         />
         <span className="pl-1"> {sendMessage.name}</span>
       </div>

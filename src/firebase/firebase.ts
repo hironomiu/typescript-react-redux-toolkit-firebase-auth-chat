@@ -25,8 +25,9 @@ export const auth = getAuth(firebaseApp)
 export const socialMediaAuth = async (provider: GithubAuthProvider) => {
   try {
     const auth = getAuth(firebaseApp)
-    const data = signInWithPopup(auth, provider)
-    return data.then((res) => res.user)
+    const data = await signInWithPopup(auth, provider)
+    // return data.then((res) => res.user)
+    return data.user
   } catch (err) {
     console.log(err)
   }

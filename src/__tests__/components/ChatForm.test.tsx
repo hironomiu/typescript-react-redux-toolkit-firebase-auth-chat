@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { render, screen } from '@testing-library/react'
-import authReducer from '../features/auth/authSlice'
-import chatReducer from '../features/chat/chatSlice'
-import userReducer from '../features/user/userSlice'
-import { ChatForm } from '../components/ChatForm'
+import authReducer from '../../features/auth/authSlice'
+import chatReducer from '../../features/chat/chatSlice'
+import userReducer from '../../features/user/userSlice'
+import { ChatForm } from '../../components/ChatForm'
 import { Provider } from 'react-redux'
 import userEvent from '@testing-library/user-event'
 

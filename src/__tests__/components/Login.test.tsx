@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import { Login } from '../components/Login'
+import { Login } from '../../components/Login'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { store } from '../app/store'
+import { store } from '../../app/store'
 describe('Login', () => {
   it('Login Page rendered cases', () => {
     render(

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import { ChatMessage } from '../components'
+import { ChatMessage } from '../../components'
 
 describe('ChatMessage', () => {
   it('ChatMessage', () => {

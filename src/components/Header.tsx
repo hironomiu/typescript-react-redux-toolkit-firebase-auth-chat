@@ -34,7 +34,7 @@ export const Header: FC = memo(() => {
             </>
           ) : (
             <div className="py-6 md:ml-4 sm:ml-1">
-              <span className="p-3">Super Web Site!</span>
+              <span className="p-3">Super Chat!!!</span>
             </div>
           )}
         </nav>

@@ -1,10 +1,10 @@
 import { render, screen, cleanup } from '@testing-library/react'
-import { ChatList } from '../components/ChatList'
+import { ChatList } from '../../components/ChatList'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
-import authReducer from '../features/auth/authSlice'
-import chatReducer from '../features/chat/chatSlice'
-import userReducer from '../features/user/userSlice'
+import authReducer from '../../features/auth/authSlice'
+import chatReducer from '../../features/chat/chatSlice'
+import userReducer from '../../features/user/userSlice'
 
 let store = configureStore({
   reducer: {
@@ -14,6 +14,9 @@ let store = configureStore({
   },
 })
 
+afterEach(() => {
+  cleanup()
+})
 // TODO messagesをモックしてテストを書く
 describe('ChatList', () => {
   it('ChatList', () => {

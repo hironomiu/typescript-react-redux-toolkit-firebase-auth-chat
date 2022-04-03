@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import { Footer } from '../components/Footer'
+import { Footer } from '../../components/Footer'
 
 test('renders learn react link', () => {
   render(<Footer />)

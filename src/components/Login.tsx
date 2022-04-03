@@ -24,7 +24,7 @@ export const Login: FC = memo((props) => {
         onClick={() => dispatch(authentication(githubProvider))}
         data-testid="github-login-button"
       >
-        GitHub Lgoin!
+        GitHub Login!
       </button>
     </>
   )

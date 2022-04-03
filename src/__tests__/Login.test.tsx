@@ -13,7 +13,7 @@ describe('Login', () => {
         </Provider>
       </BrowserRouter>
     )
-    expect(screen.getByText('GitHub Lgoin!')).toBeInTheDocument()
+    expect(screen.getByText('GitHub Login!')).toBeInTheDocument()
     expect(screen.getByTestId('github-login-button')).toBeTruthy()
   })
 })

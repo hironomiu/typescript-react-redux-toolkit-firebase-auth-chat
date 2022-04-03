@@ -7,7 +7,13 @@ import { ChatForm } from '../components/ChatForm'
 import { Provider } from 'react-redux'
 import userEvent from '@testing-library/user-event'
 
-let store: any
+let store = configureStore({
+  reducer: {
+    auth: authReducer,
+    chat: chatReducer,
+    user: userReducer,
+  },
+})
 
 beforeEach(() => {
   store = configureStore({

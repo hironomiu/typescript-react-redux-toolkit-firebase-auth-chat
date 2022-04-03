@@ -1,9 +1,11 @@
 import { render, screen } from '@testing-library/react'
 import App from '../App'
 
-// TODO テスト
 describe('App', () => {
   it('aa', () => {
-    // render(<App />)
+    let scrollIntoViewMock = jest.fn()
+    window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock
+    render(<App />)
+    expect(screen.getByText('GitHub Login!')).toBeInTheDocument()
   })
 })

@@ -21,5 +21,7 @@ describe('Profile', () => {
         <Profile />
       </Provider>
     )
+    expect(screen.getByText(/Profile/)).toBeInTheDocument()
+    expect(screen.getByText('アバター画像を登録する')).toBeInTheDocument()
   })
 })

@@ -112,7 +112,7 @@ export const Profile: FC = memo(() => {
         </>
       ) : (
         <span
-          className="hover:cursor-pointer"
+          className="my-2 px-2 py-1 border-2 hover:cursor-pointer"
           onClick={() => setIsEntry((isEntry) => !isEntry)}
         >
           アバター画像を登録する

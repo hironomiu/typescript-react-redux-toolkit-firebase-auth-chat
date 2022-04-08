@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { pushMessage } from '../firebase/firebase'
 import { setText, selectSendMessage } from '../features/chat/chatSlice'
 import { selectUser } from '../features/user/userSlice'
+import Button from './parts/Button'
 
 export const ChatForm: FC = memo(() => {
   const autoFocus = (el: HTMLTextAreaElement) => (el ? el.focus() : null)
@@ -12,6 +13,11 @@ export const ChatForm: FC = memo(() => {
 
   // 日本語入力判定用
   const [isJapaneseInput, setIsInputJapanese] = useState(false)
+
+  const handleClick = () => {
+    pushMessage(sendMessage)
+    dispatch(setText(''))
+  }
 
   return (
     <div className="flex items-center my-5 ">
@@ -56,16 +62,13 @@ export const ChatForm: FC = memo(() => {
         value={sendMessage.text}
         ref={autoFocus}
       ></textarea>
-      <button
-        className="mx-2 px-5 bg-gray-300 rounded focus:outline-gray-600 border-solid border-2 disabled:bg-gray-50 disabled:text-white"
+      <Button
+        title="Post"
+        testId=""
+        handleClick={handleClick}
         disabled={!sendMessage.name || !sendMessage.text}
-        onClick={() => {
-          pushMessage(sendMessage)
-          dispatch(setText(''))
-        }}
-      >
-        Post
-      </button>
+        styles="mx-2 py-2 px-5 bg-gray-200 font-bold rounded focus:outline-gray-600 border-solid border-2 hover:bg-black hover:text-white hover:font-bold disabled:bg-gray-50 disabled:text-white"
+      />
     </div>
   )
 })

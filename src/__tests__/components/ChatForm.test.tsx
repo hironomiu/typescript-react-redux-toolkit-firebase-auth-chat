@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { render, screen } from '@testing-library/react'
 import authReducer from '../../features/auth/authSlice'
-import chatReducer from '../../features/chat/chatSlice'
+import chatReducer, { setName } from '../../features/chat/chatSlice'
 import userReducer from '../../features/user/userSlice'
 import { ChatForm } from '../../components/ChatForm'
 import { Provider } from 'react-redux'
@@ -33,11 +33,16 @@ describe('ChatForm', () => {
         <ChatForm />
       </Provider>
     )
+
     expect(screen.getByTestId('profile-img')).toBeInTheDocument()
     expect(screen.getByRole('button')).toHaveAttribute('disabled')
     userEvent.type(screen.getByRole('textbox'), 'test')
     expect(screen.getByRole('textbox')).toHaveValue('test')
-    // TODO sendMessage.nameに何か設定する
-    // expect(screen.getByRole('button')).not.toHaveAttribute('disabled')
+    // sendMessage.nameに設定する
+    expect(store.getState().chat.sendMessage.name).toBe('')
+    const action = { type: setName.type, payload: 'dummy name' }
+    store.dispatch(action)
+    expect(store.getState().chat.sendMessage.name).toBe('dummy name')
+    expect(screen.getByRole('button')).not.toHaveAttribute('disabled')
   })
 })

@@ -13,7 +13,7 @@ export const Header: FC = memo(() => {
       <header className="bg-gray-400 w-screen">
         <nav className="flex flex-row justify-between ">
           {isAuthentication ? (
-            <>
+            <div>
               <div className="py-6 md:ml-4 sm:ml-1">
                 <span className="p-3">Super Chat!!!</span>
                 <Link className="p-3 hover:bg-gray-500 rounded" to="/">
@@ -31,7 +31,7 @@ export const Header: FC = memo(() => {
                   SignOut
                 </button>
               </div>
-            </>
+            </div>
           ) : (
             <div className="py-6 md:ml-4 sm:ml-1">
               <span className="p-3">Super Chat!!!</span>

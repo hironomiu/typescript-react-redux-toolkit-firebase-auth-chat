@@ -17,7 +17,7 @@ let store = configureStore({
 afterEach(() => {
   cleanup()
 })
-// TODO messagesをモックしてテストを書く
+
 describe('ChatList', () => {
   it('ChatList', () => {
     let scrollIntoViewMock = jest.fn()
@@ -32,6 +32,7 @@ describe('ChatList', () => {
     expect(screen.getByTestId('chat-list-div')).toBeInTheDocument()
     const element: HTMLDivElement = screen.getByTestId('chat-list-div')
     expect(element.nodeValue).toBeNull()
+    // messagesをモック
     const action = {
       type: setMessages.type,
       payload: [

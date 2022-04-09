@@ -25,7 +25,6 @@ beforeEach(() => {
   })
 })
 
-// TODO 書き足す
 describe('ChatForm', () => {
   it('test', () => {
     render(

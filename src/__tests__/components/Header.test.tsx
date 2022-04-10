@@ -15,7 +15,7 @@ let store = configureStore({
   },
 })
 describe('Header', () => {
-  it('未ログイン', () => {
+  it('未ログイン状態', () => {
     render(
       <Provider store={store}>
         <Header />
@@ -23,7 +23,7 @@ describe('Header', () => {
     )
     expect(screen.getByText('Super Chat!!!')).toBeInTheDocument()
   })
-  it('ログイン', () => {
+  it('ログイン状態', () => {
     const action = {
       type: signIn.type,
       payload: {

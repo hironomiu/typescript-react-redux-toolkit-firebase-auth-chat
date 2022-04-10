@@ -26,6 +26,12 @@ yarn run build
 yarn test
 ```
 
+カバレッジを見たい場合
+
+```
+yarn test --coverage .
+```
+
 ## Install Memo
 
 ### React

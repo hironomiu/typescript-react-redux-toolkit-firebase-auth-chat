@@ -57,6 +57,8 @@ describe('Profile', () => {
 
     userEvent.click(screen.getByTestId('avatar-registration'))
     expect(screen.getByText('アップロード')).toBeInTheDocument()
+    // TODO: アップロード画像を選択した場合の not disabled についてもテストを考える
+    expect(screen.getByTestId('upload-button')).toHaveAttribute('disabled')
     expect(screen.getByText('閉じる')).toBeInTheDocument()
     userEvent.click(screen.getByTestId('close-button'))
     // TODO: 存在しないことのテスト

@@ -93,16 +93,17 @@ export const Profile: FC = memo(() => {
               />
             ) : null}
           </div>
-          <div className="my-2">
+          <div className="my-4">
             <button
-              className="mx-2 px-2 py-1 border-2 rounded"
+              className="mx-2 px-2 py-1 border-2 rounded hover:bg-black hover:text-white hover:font-bold"
               disabled={!preview ? true : false}
               onClick={handleClick}
+              data-testid="upload-button"
             >
               アップロード
             </button>
             <button
-              className="mx-2 px-2 py-1 border-2 rounded"
+              className="mx-2 px-2 py-1 border-2 rounded hover:bg-black hover:text-white hover:font-bold"
               onClick={() => {
                 if (isEntry) setIsEntry((isEntry) => !isEntry)
               }}
@@ -114,7 +115,7 @@ export const Profile: FC = memo(() => {
         </>
       ) : (
         <span
-          className="my-2 px-2 py-1 border-2 hover:cursor-pointer"
+          className="my-10 animate-bounce selection:my-2 px-2 py-1 border-2 hover:cursor-pointer hover:bg-black hover:text-white hover:font-bold"
           onClick={() => setIsEntry((isEntry) => !isEntry)}
           data-testid="avatar-registration"
         >

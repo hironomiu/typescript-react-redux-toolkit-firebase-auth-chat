@@ -106,6 +106,7 @@ export const Profile: FC = memo(() => {
               onClick={() => {
                 if (isEntry) setIsEntry((isEntry) => !isEntry)
               }}
+              data-testid="close-button"
             >
               閉じる
             </button>
@@ -115,6 +116,7 @@ export const Profile: FC = memo(() => {
         <span
           className="my-2 px-2 py-1 border-2 hover:cursor-pointer"
           onClick={() => setIsEntry((isEntry) => !isEntry)}
+          data-testid="avatar-registration"
         >
           アバター画像を登録する
         </span>

@@ -5,6 +5,7 @@ import chatReducer from '../../features/chat/chatSlice'
 import userReducer, { setUser } from '../../features/user/userSlice'
 import { Provider } from 'react-redux'
 import { Profile } from '../../components'
+import userEvent from '@testing-library/user-event'
 
 let store = configureStore({
   reducer: {
@@ -50,5 +51,14 @@ describe('Profile', () => {
     }
     store.dispatch(action)
     expect(screen.getByTestId('photo-img')).toBeInTheDocument()
+    // クリックイベント
+    // TODO: 存在しないことのテスト
+    // expect(screen.getByText('アップロード'))
+
+    userEvent.click(screen.getByTestId('avatar-registration'))
+    expect(screen.getByText('アップロード')).toBeInTheDocument()
+    expect(screen.getByText('閉じる')).toBeInTheDocument()
+    userEvent.click(screen.getByTestId('close-button'))
+    // TODO: 存在しないことのテスト
   })
 })

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from '../../features/auth/authSlice'
 import chatReducer from '../../features/chat/chatSlice'
-import userReducer from '../../features/user/userSlice'
+import userReducer, { setUser } from '../../features/user/userSlice'
 import { Provider } from 'react-redux'
 import { Profile } from '../../components'
 
@@ -21,7 +21,34 @@ describe('Profile', () => {
         <Profile />
       </Provider>
     )
+    let action = {
+      type: setUser.type,
+      payload: {
+        uid: '',
+        name: 'dummy name',
+        photoURL: '',
+        email: 'dummy@example.com',
+        createdAt: 0,
+      },
+    }
+    store.dispatch(action)
+    expect(screen.getByText("dummy name's Profile")).toBeInTheDocument()
+    expect(screen.getByText('email:dummy@example.com')).toBeInTheDocument()
     expect(screen.getByText(/Profile/)).toBeInTheDocument()
     expect(screen.getByText('アバター画像を登録する')).toBeInTheDocument()
+    expect(screen.getByText('no photo image')).toBeInTheDocument()
+    // 画像あり
+    action = {
+      type: setUser.type,
+      payload: {
+        uid: '',
+        name: 'dummy name',
+        photoURL: 'http://dummy',
+        email: 'dummy@example.com',
+        createdAt: 0,
+      },
+    }
+    store.dispatch(action)
+    expect(screen.getByTestId('photo-img')).toBeInTheDocument()
   })
 })

@@ -61,6 +61,7 @@ export const Profile: FC = memo(() => {
           <img
             className="inline-block h-14 w-14 rounded-full ring-2 ring-white"
             src={user.photoURL}
+            data-testid="photo-img"
             alt=""
           />
         ) : (

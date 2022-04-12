@@ -62,6 +62,8 @@ describe('Profile', () => {
     expect(screen.getByTestId('upload-button')).toHaveAttribute('disabled')
     expect(screen.getByText('閉じる')).toBeInTheDocument()
     userEvent.click(screen.getByTestId('close-button'))
-    // TODO: 存在しないことのテスト
+    // 存在しないことのテスト
+    expect(screen.queryByTestId('upload-button')).toBeNull()
+    expect(screen.queryByTestId('close-button')).toBeNull()
   })
 })

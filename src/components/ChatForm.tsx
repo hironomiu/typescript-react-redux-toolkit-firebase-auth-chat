@@ -1,7 +1,11 @@
 import { FC, memo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { pushMessage } from '../firebase/firebase'
-import { setText, selectSendMessage } from '../features/chat/chatSlice'
+import {
+  setText,
+  setPhotoURL,
+  selectSendMessage,
+} from '../features/chat/chatSlice'
 import { selectUser } from '../features/user/userSlice'
 import Button from './parts/Button'
 
@@ -15,6 +19,8 @@ export const ChatForm: FC = memo(() => {
   const [isJapaneseInput, setIsInputJapanese] = useState(false)
 
   const handleClick = () => {
+    // TODO: リロード時などにuserが空になりuser.photoURLが取れない対応(リロード時の認証チェックと同じタイミングでuserを再設定する)
+    dispatch(setPhotoURL(user.photoURL))
     pushMessage(sendMessage)
     dispatch(setText(''))
   }

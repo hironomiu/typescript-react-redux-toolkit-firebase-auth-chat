@@ -72,12 +72,14 @@ type Message = {
   name: string
   text: string
   uid: string
+  photoURL: string
 }
-export const pushMessage = ({ name, text, uid }: Message) => {
+export const pushMessage = ({ name, text, uid, photoURL }: Message) => {
   push(ref(database, 'messages'), {
     name,
     text,
     uid,
+    photoURL,
     createdAt: serverTimestamp(),
   })
 }

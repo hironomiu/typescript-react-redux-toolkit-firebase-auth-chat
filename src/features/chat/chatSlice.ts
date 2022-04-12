@@ -8,12 +8,14 @@ type SendMessage = {
   uid: string
   name: string
   text: string
+  photoURL: string
 }
 
 type Message = {
   name: string
   text: string
   uid: string
+  photoURL: string
   createdAt: number
 }
 export type InitialState = {
@@ -22,8 +24,10 @@ export type InitialState = {
 }
 
 const initialState: InitialState = {
-  sendMessage: { uid: '', name: '', text: '' },
-  messages: [{ key: '', name: '', text: '', uid: '', createdAt: 0 }],
+  sendMessage: { uid: '', name: '', text: '', photoURL: '' },
+  messages: [
+    { key: '', name: '', text: '', uid: '', photoURL: '', createdAt: 0 },
+  ],
 }
 
 export const readMessages = () => (dispatch: Dispatch) => {
@@ -57,6 +61,9 @@ export const chatSlice = createSlice({
     setText: (state, action) => {
       state.sendMessage.text = action.payload
     },
+    setPhotoURL: (state, action) => {
+      state.sendMessage.photoURL = action.payload
+    },
     setMessages: (state, action) => {
       state.messages = action.payload
     },
@@ -77,5 +84,6 @@ export const chatSlice = createSlice({
 export const selectSendMessage = (state: RootState) => state.chat.sendMessage
 export const selectMessages = (state: RootState) => state.chat.messages
 
-export const { setUid, setName, setText, setMessages } = chatSlice.actions
+export const { setUid, setName, setText, setPhotoURL, setMessages } =
+  chatSlice.actions
 export default chatSlice.reducer

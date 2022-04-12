@@ -52,8 +52,9 @@ describe('Profile', () => {
     store.dispatch(action)
     expect(screen.getByTestId('photo-img')).toBeInTheDocument()
     // クリックイベント
-    // TODO: 存在しないことのテスト
-    // expect(screen.getByText('アップロード'))
+    // 存在しないことのテスト
+    expect(screen.queryByTestId('upload-button')).toBeNull()
+    expect(screen.queryByTestId('close-button')).toBeNull()
 
     userEvent.click(screen.getByTestId('avatar-registration'))
     expect(screen.getByText('アップロード')).toBeInTheDocument()

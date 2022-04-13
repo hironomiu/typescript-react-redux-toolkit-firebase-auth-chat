@@ -10,12 +10,14 @@ const initialState: InitialState = {
     uid: '',
     name: '',
     text: '',
+    photoURL: '',
   },
   messages: [
     {
       key: '',
       name: '',
       text: '',
+      photoURL: '',
       createdAt: 0,
       uid: '',
     },

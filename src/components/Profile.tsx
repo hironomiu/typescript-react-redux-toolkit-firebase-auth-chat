@@ -25,6 +25,7 @@ export const Profile: FC = memo(() => {
   }
   const user = useSelector(selectUser)
 
+  // TODO: バグ：アップロード後にTopに戻り、チャットを投稿しても過去の画像のURLになる（再度Top->Profile->Topで最新になる）
   const handleClick = async () => {
     console.log(user)
     const sRef = ref(storage, 'images/' + user.uid + '_avatar')

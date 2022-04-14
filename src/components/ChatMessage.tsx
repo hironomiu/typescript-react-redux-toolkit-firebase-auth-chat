@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FC, memo } from 'react'
 import { formatDate } from '../lib/'
 import { selectDefaultAvatarURL } from '../features/chat/chatSlice'

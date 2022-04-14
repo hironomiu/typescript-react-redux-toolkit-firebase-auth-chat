@@ -22,6 +22,8 @@ const initialState: InitialState = {
       uid: '',
     },
   ],
+  // TODO: 追加したdefaultAvatarURLのテスト
+  defaultAvatarURL: '',
 }
 describe('chatSlice', () => {
   describe('setUid', () => {

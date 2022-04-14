@@ -4,7 +4,7 @@ import { messagesRef, storage } from '../../firebase/firebase'
 import { onValue } from 'firebase/database'
 import { Dispatch } from 'redux'
 // TODO: 直接呼ばない
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { ref, getDownloadURL } from 'firebase/storage'
 
 type SendMessage = {
   uid: string

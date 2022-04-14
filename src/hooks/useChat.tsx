@@ -6,7 +6,12 @@ import {
   selectUid,
 } from '../features/auth/authSlice'
 import { getFirebaseUser } from '../features/user/userSlice'
-import { setName, setUid, readMessages } from '../features/chat/chatSlice'
+import {
+  setName,
+  setUid,
+  readMessages,
+  getDefaultAvatarURL,
+} from '../features/chat/chatSlice'
 
 const useChat = () => {
   const dispatch = useDispatch()
@@ -19,6 +24,7 @@ const useChat = () => {
       dispatch(setName(displayName))
       dispatch(setUid(uid))
       dispatch(getFirebaseUser(uid))
+      dispatch(getDefaultAvatarURL())
     }
   }, [isAuthentication, displayName, dispatch, uid])
 

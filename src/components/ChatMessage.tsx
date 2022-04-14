@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FC, memo } from 'react'
 import { formatDate } from '../lib/'
+import { selectDefaultAvatarURL } from '../features/chat/chatSlice'
+import { useSelector } from 'react-redux'
 
 type Props = {
   name: string
@@ -11,6 +13,8 @@ type Props = {
 
 export const ChatMessage: FC<Props> = memo(
   ({ name, text, photoURL, createdAt }) => {
+    const defaultURL = useSelector(selectDefaultAvatarURL)
+
     const dateTime = new Date(createdAt)
     const output = text.split(/(\n)/).map((item, index) => {
       return (
@@ -24,7 +28,7 @@ export const ChatMessage: FC<Props> = memo(
         {/* TODO: photoURLが空だった場合に表示するデフォルトの画像の設定 */}
         <img
           className="inline-block h-14 w-14 rounded-full ring-2 ring-white"
-          src={photoURL}
+          src={photoURL ? photoURL : defaultURL}
           alt=""
         />
         <div className="flex flex-col m-2">

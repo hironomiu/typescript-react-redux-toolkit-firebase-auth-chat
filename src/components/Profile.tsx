@@ -3,6 +3,7 @@ import { storage } from '../firebase/firebase'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectUser, updateFirebaseUser } from '../features/user/userSlice'
 import { MessageModal } from './'
+// TODO: 直接呼ばない
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 export const Profile: FC = memo(() => {

@@ -30,6 +30,7 @@ export const ChatMessage: FC<Props> = memo(
           className="inline-block h-14 w-14 rounded-full ring-2 ring-white"
           src={photoURL ? photoURL : defaultURL}
           alt=""
+          data-testid="photo-img"
         />
         <div className="flex flex-col m-2">
           <span className="text-gray-700 font-bold text-sm">

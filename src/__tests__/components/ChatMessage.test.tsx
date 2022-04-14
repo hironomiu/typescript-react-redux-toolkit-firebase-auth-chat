@@ -31,6 +31,7 @@ describe('ChatMessage', () => {
     expect(screen.getByText(/dummy name/i)).toBeInTheDocument()
     expect(screen.getByText(/dummy text/i)).toBeInTheDocument()
     expect(screen.getByText(/2022-01-01 00:00:00/i)).toBeInTheDocument()
+    expect(screen.getByTestId('photo-img')).toBeInTheDocument()
     // TODO: photoURLが無い場合のテスト & 設定した場合のテスト
   })
 })

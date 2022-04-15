@@ -16,11 +16,14 @@ export const Header: FC = memo(() => {
             <>
               <div className="py-6 md:ml-4 sm:ml-1">
                 <span className="py-3 px-4">Super Chat!!!</span>
-                <Link className="py-3 px-4 hover:bg-gray-200 rounded" to="/">
+                <Link
+                  className="py-3 px-4 hover:border-b-2 hover:border-gray-400"
+                  to="/"
+                >
                   Top
                 </Link>
                 <Link
-                  className="py-3 px-4 hover:bg-gray-200 rounded"
+                  className="py-3 px-4 hover:border-b-2 hover:border-gray-400"
                   to="/profile"
                 >
                   Profile
@@ -28,7 +31,7 @@ export const Header: FC = memo(() => {
               </div>
               <div className="py-3 md:mr-4 sm:mr-1">
                 <button
-                  className="p-3 hover:bg-gray-200 rounded "
+                  className="p-3 hover:border-b-2 hover:border-gray-400"
                   onClick={() => dispatch(signOut())}
                 >
                   SignOut

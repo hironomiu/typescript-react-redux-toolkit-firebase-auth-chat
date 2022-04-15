@@ -15,17 +15,20 @@ export const Header: FC = memo(() => {
           {isAuthentication ? (
             <>
               <div className="py-6 md:ml-4 sm:ml-1">
-                <span className="p-3">Super Chat!!!</span>
-                <Link className="p-3 hover:bg-gray-500 rounded" to="/">
+                <span className="py-3 px-4">Super Chat!!!</span>
+                <Link className="py-3 px-4 hover:bg-gray-200 rounded" to="/">
                   Top
                 </Link>
-                <Link className="p-3 hover:bg-gray-500 rounded" to="/profile">
+                <Link
+                  className="py-3 px-4 hover:bg-gray-200 rounded"
+                  to="/profile"
+                >
                   Profile
                 </Link>
               </div>
               <div className="py-3 md:mr-4 sm:mr-1">
                 <button
-                  className="p-3 hover:bg-gray-500 rounded "
+                  className="p-3 hover:bg-gray-200 rounded "
                   onClick={() => dispatch(signOut())}
                 >
                   SignOut

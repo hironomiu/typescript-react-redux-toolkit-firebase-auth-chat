@@ -15,16 +15,16 @@ let store = configureStore({
 })
 
 describe('ChatMessage', () => {
+  const dummyDate = new Date('2022-01-01 00:00:00')
+
   it('ChatMessage', () => {
-    const dummyDate = new Date('2022-01-01 00:00:00')
-    // TODO: reduxを使うことにしたのでその対応
     render(
       <Provider store={store}>
         <ChatMessage
           name="dummy name"
           text="dummy text"
           createdAt={Number(dummyDate)}
-          photoURL=""
+          photoURL="http://dummy"
         />
       </Provider>
     )
@@ -32,6 +32,24 @@ describe('ChatMessage', () => {
     expect(screen.getByText(/dummy text/i)).toBeInTheDocument()
     expect(screen.getByText(/2022-01-01 00:00:00/i)).toBeInTheDocument()
     expect(screen.getByTestId('photo-img')).toBeInTheDocument()
-    // TODO: photoURLが無い場合のテスト & 設定した場合のテスト
+    expect(screen.getByTestId('photo-img').getAttribute('src')).toEqual(
+      'http://dummy'
+    )
+  })
+
+  // TODO: photoURLが無い場合のテスト & 設定した場合のテスト
+
+  it('reduxからdefaultURLを取得', () => {
+    // TODO: reduxにdefaultURLを設定する
+    render(
+      <Provider store={store}>
+        <ChatMessage
+          name="dummy name"
+          text="dummy text"
+          createdAt={Number(dummyDate)}
+          photoURL="http://dummy"
+        />
+      </Provider>
+    )
   })
 })

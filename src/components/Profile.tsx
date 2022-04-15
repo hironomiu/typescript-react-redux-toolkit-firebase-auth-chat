@@ -61,7 +61,7 @@ export const Profile: FC = memo(() => {
       <div className="flex -space-x-2 overflow-hidden flex-col px-4">
         {user.photoURL ? (
           <img
-            className="inline-block h-14 w-14 rounded-full ring-2 ring-white"
+            className="inline-block h-32 w-32 rounded-full ring-2 ring-white"
             src={user.photoURL}
             data-testid="photo-img"
             alt=""
@@ -80,6 +80,7 @@ export const Profile: FC = memo(() => {
       {isEntry ? (
         <>
           <input
+            className="mt-10"
             key={key}
             type="file"
             name=""

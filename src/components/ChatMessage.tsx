@@ -25,7 +25,6 @@ export const ChatMessage: FC<Props> = memo(
     })
     return (
       <div className="flex flex-row m-2">
-        {/* TODO: photoURLが空だった場合に表示するデフォルトの画像の設定 */}
         <img
           className="inline-block h-14 w-14 rounded-full ring-2 ring-white"
           src={photoURL ? photoURL : defaultURL}

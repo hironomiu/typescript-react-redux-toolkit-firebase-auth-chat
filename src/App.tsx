@@ -7,19 +7,17 @@ import { Login, Profile, Chat } from './components'
 
 const App: VFC = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <Provider store={store}>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route path="/" element={<Chat />}></Route>
-              <Route path="/profile" element={<Profile />}></Route>
-              <Route path="/login" element={<Login />}></Route>
-            </Route>
-          </Routes>
-        </Provider>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Chat />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+          </Route>
+        </Routes>
+      </Provider>
+    </BrowserRouter>
   )
 }
 

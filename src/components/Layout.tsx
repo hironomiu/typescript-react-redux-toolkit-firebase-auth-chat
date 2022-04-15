@@ -21,7 +21,7 @@ export const Layout: FC = memo(() => {
   }, [navigate, isAuthentication, dispatch])
 
   return (
-    <div className="container flex flex-col w-[100vw] h-[100vh]">
+    <div className=" flex flex-col w-screen h-[100vh] bg-gray-100">
       <Header />
       <div className="flex flex-col overflow-y-auto items-center justify-center flex-1 w-screen">
         <Outlet />

@@ -10,7 +10,7 @@ export const Header: FC = memo(() => {
 
   return (
     <>
-      <header className="bg-gray-400 w-screen">
+      <header className="bg-white w-screen">
         <nav className="flex flex-row justify-between ">
           {isAuthentication ? (
             <>

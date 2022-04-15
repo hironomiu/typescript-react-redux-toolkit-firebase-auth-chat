@@ -20,7 +20,7 @@ export const ChatList: FC = memo(() => {
 
   return (
     <div
-      className="mt-5 overflow-auto h-[80vh] w-[80vw] bg-gray-100 rounded"
+      className="mt-5 overflow-auto h-[80vh] w-[80vw] bg-white rounded"
       data-testid="chat-list-main-div"
     >
       <div className="p-2" data-testid="chat-list-div">

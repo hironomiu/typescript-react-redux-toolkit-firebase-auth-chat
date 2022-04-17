@@ -1,12 +1,11 @@
-import { FC, memo } from 'react'
+import { FC, memo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { signOut } from '../features/auth/authSlice'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { selectIsAuthentication } from '../features/auth/authSlice'
-
+import SignOutModal from './modal/SignOutModal'
 export const Header: FC = memo(() => {
-  const dispatch = useDispatch()
   const isAuthentication = useSelector(selectIsAuthentication)
+  const [isModalOn, setIsModalOn] = useState<boolean>(false)
 
   return (
     <>
@@ -32,11 +31,17 @@ export const Header: FC = memo(() => {
               <div className="py-3 md:mr-4 sm:mr-1">
                 <button
                   className="p-3 hover:border-b-2 hover:border-gray-400"
-                  onClick={() => dispatch(signOut())}
+                  onClick={() => setIsModalOn(true)}
                 >
                   SignOut
                 </button>
               </div>
+              {isModalOn ? (
+                <SignOutModal
+                  isModalOn={isModalOn}
+                  setIsModalOn={setIsModalOn}
+                />
+              ) : null}
             </>
           ) : (
             <div className="py-6 md:ml-4 sm:ml-1">

@@ -1,8 +1,16 @@
+import { useRef, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { signOut } from '../../features/auth/authSlice'
 // Memo: MessageModalと違い@headlessui/reactを使っていない（react v18で謎の挙動で上手く動作していないため）
+// TODO: 型
 const SignOutModal = ({ setIsModalOn, isModalOn }: any) => {
+  const ref = useRef<HTMLButtonElement>(null!)
   const dispatch = useDispatch()
+  // Cancelボタンにフォーカス
+  useEffect(() => {
+    ref.current.focus()
+  }, [])
+
   return (
     <>
       <div
@@ -20,7 +28,10 @@ const SignOutModal = ({ setIsModalOn, isModalOn }: any) => {
               <p className="font-bold text-2xl text-gray-900">SignOut?</p>
             </div>
           </div>
-          <div className="text-center md:text-right mt-4 md:flex md:justify-end">
+          <div
+            onKeyDown={(e) => console.log('hoge')}
+            className="text-center md:text-right mt-4 md:flex md:justify-end"
+          >
             <button
               onClick={() => {
                 dispatch(signOut())
@@ -34,8 +45,9 @@ const SignOutModal = ({ setIsModalOn, isModalOn }: any) => {
             <button
               onClick={() => setIsModalOn(false)}
               className="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2 hover:bg-gray-400 bg-gray-200 rounded-lg font-semibold text-sm mt-4
-          md:mt-0 md:order-1"
+          md:mt-0 md:order-1 focus:border-black"
               data-testid="card-modal-close-button"
+              ref={ref}
             >
               Cancel
             </button>

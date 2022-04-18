@@ -28,13 +28,13 @@ export const Header: FC = memo(() => {
                   Profile
                 </Link>
               </div>
-              <div className="py-3 md:mr-4 sm:mr-1">
-                <button
-                  className="p-3 hover:border-b-2 hover:border-gray-400"
+              <div className="py-6 md:mr-4 sm:mr-1">
+                <span
+                  className="py-3 hover:cursor-pointer hover:border-b-2 hover:border-gray-400"
                   onClick={() => setIsModalOn(true)}
                 >
                   SignOut
-                </button>
+                </span>
               </div>
               {isModalOn ? (
                 <SignOutModal

@@ -45,7 +45,7 @@ const SignOutModal = ({ setIsModalOn, isModalOn }: any) => {
             <button
               onClick={() => setIsModalOn(false)}
               className="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2 hover:bg-gray-400 bg-gray-200 rounded-lg font-semibold text-sm mt-4
-          md:mt-0 md:order-1 focus:border-black"
+          md:mt-0 md:order-1 focus:shadow-outline focus:border-gray-400"
               data-testid="card-modal-close-button"
               ref={ref}
             >

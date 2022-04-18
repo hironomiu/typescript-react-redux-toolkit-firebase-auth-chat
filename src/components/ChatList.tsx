@@ -8,7 +8,6 @@ export const ChatList: FC = memo(() => {
   const messages = useSelector(selectMessages)
   const scrollBottomRef = useRef<null | HTMLDivElement>(null)
 
-  console.log(messages)
   // スクロール一番下へ誘導 -> ref={scrollBottomRef} でポジションを確定
   useLayoutEffect(() => {
     if (scrollBottomRef) {

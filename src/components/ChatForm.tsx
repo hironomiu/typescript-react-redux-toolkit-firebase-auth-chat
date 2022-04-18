@@ -1,4 +1,4 @@
-import { FC, memo, useState } from 'react'
+import { FC, memo, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { pushMessage } from '../firebase/firebase'
 import {
@@ -17,6 +17,12 @@ export const ChatForm: FC = memo(() => {
 
   // 日本語入力判定用
   const [isJapaneseInput, setIsInputJapanese] = useState(false)
+
+  // リロード時のphotoURLの空対策
+  // TODO: auth,chat,userで各々ユーザ情報を所有しているのがここら辺で大変になってきているのでここ含め整理する
+  useEffect(() => {
+    dispatch(setPhotoURL(user.photoURL))
+  }, [dispatch, user])
 
   const handleClick = () => {
     // TODO: リロード時などにuserが空になりuser.photoURLが取れない対応(リロード時の認証チェックと同じタイミングでuserを再設定する)

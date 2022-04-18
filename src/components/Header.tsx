@@ -7,6 +7,9 @@ export const Header: FC = memo(() => {
   const isAuthentication = useSelector(selectIsAuthentication)
   const [isModalOn, setIsModalOn] = useState<boolean>(false)
 
+  const handleClick = () => {
+    setIsModalOn(true)
+  }
   return (
     <>
       <header className="bg-white w-screen">
@@ -31,17 +34,12 @@ export const Header: FC = memo(() => {
               <div className="py-6 md:mr-4 sm:mr-1">
                 <span
                   className="py-3 hover:cursor-pointer hover:border-b-2 hover:border-gray-400"
-                  onClick={() => setIsModalOn(true)}
+                  onClick={handleClick}
                 >
                   SignOut
                 </span>
               </div>
-              {isModalOn ? (
-                <SignOutModal
-                  isModalOn={isModalOn}
-                  setIsModalOn={setIsModalOn}
-                />
-              ) : null}
+              {isModalOn ? <SignOutModal setIsModalOn={setIsModalOn} /> : null}
             </>
           ) : (
             <div className="py-6 md:ml-4 sm:ml-1">

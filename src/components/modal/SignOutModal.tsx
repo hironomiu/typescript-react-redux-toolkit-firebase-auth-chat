@@ -2,8 +2,11 @@ import { useRef, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { signOut } from '../../features/auth/authSlice'
 // Memo: MessageModalと違い@headlessui/reactを使っていない（react v18で謎の挙動で上手く動作していないため）
-// TODO: 型
-const SignOutModal = ({ setIsModalOn, isModalOn }: any) => {
+
+type Props = {
+  setIsModalOn: React.Dispatch<React.SetStateAction<boolean>>
+}
+const SignOutModal = ({ setIsModalOn }: Props) => {
   const ref = useRef<HTMLButtonElement>(null!)
   const dispatch = useDispatch()
   // Cancelボタンにフォーカス

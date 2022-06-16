@@ -24,14 +24,14 @@ export const ChatMessage: FC<Props> = memo(
       )
     })
     return (
-      <div className="flex flex-row m-2">
+      <div className="flex flex-row m-2 border-b-[1px] pt-1 pb-2">
         <img
           className="inline-block h-14 w-14 rounded-full ring-2 ring-white"
           src={photoURL ? photoURL : defaultURL}
           alt=""
           data-testid="photo-img"
         />
-        <div className="flex flex-col m-2">
+        <div className="flex flex-col mb-1 mx-2">
           <span className="text-gray-700 font-bold text-sm">
             {name} {formatDate(dateTime)}
           </span>
